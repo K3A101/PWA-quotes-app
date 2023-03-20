@@ -191,4 +191,8 @@ In de server moet je aangeven welke templating ejs je gaat gebruiken. Je gebruik
 Daarna maak je een views bestandmap. Hierin komt al je ejs paginas van je applicaties. 
 
 
-###
+### Public bestand
+
+
+---
+## Bronnen
