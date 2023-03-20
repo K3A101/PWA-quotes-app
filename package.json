@@ -1,0 +1,26 @@
+{
+  "name": "pwa-quotes-app",
+  "version": "1.0.0",
+  "description": "Stress relief quotes app is een app waar je citaten van verschillende beromende mensen in het wereld van de web.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/K3A101/PWA-quotes-app.git"
+  },
+  "keywords": [
+    "quotes"
+  ],
+  "author": "Keisha Alexander",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/K3A101/PWA-quotes-app/issues"
+  },
+  "homepage": "https://github.com/K3A101/PWA-quotes-app#readme"
+}
