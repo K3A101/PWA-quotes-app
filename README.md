@@ -191,8 +191,60 @@ In de server moet je aangeven welke templating ejs je gaat gebruiken. Je gebruik
 Daarna maak je een views bestandmap. Hierin komt al je ejs paginas van je applicaties. 
 
 
-### Public bestand
+### Statisch bestand
+Statisch bestanden zijn je css stylesheets, client-side javascript en je afbeeldingen. Om deze bestanden via de server te halen. Moet je de `static` express middleware gebruiken. Ik heb in mijn applicatie bestande een `public/` bestandmap gemaakt. Daarin heb ik mijn css stylesheets en mijn afbeeldingen.
+
+#### Public bestandmap toveoegen in de server
+Om mijn pagina te stijlen me de css heb ik de public bestandmap toegevoegd met de static express middleware. 
+
+```javascript
+//Gebruikt de public folder
+app.use(express.static('public'))
+```
+
+### Volledige code in app.js bestand
+
+```javascript
+// Geinstalleerde packages
+const bodyParser = require('body-parser');
+const express = require('express');
 
 
+const app = express();
+const port = 5000;
+const path = require("path");
+// Setup de template engine ejs
+app.set("views", path.join(__dirname, "views"));
+app.set('view engine', 'ejs');
+
+
+
+//Gebruikt de public folder
+app.use(express.static('public'))
+
+
+// Configuring body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+
+
+// Home pagina
+app.get('/', (req, res) => {
+    res.render("index")
+    // res.send('Hello World!!!')
+})
+
+// About pagina
+app.get('/about', (req, res) => {
+    res.render("about")
+    // res.send('Hello World!!!')
+})
+
+
+app.listen(port, () => {
+    console.log(`Example app listening on  http://localhost:${port}`)
+})
+```
 ---
 ## Bronnen
