@@ -4,7 +4,31 @@
 <body>
     
     <header>
+        <!-- De navigatie menu -->
         <%- include("./partials/nav");%>
     </header>
+
+    <h3>Quotes</h3>
+    <!-- De tags menu en de searchbar -->
+    <%- include("./partials/filter") %>
+
+    <main>
+        <section id="content">
+            <article>
+                <section>
+                    <q>${item.quote}</q>
+            
+                    <p class="author">${item.author}</p>
+                </section>
+                <section>
+                    <img src="${item.avatar}" alt="Avatar">
+                    <p>${item.bio}</p>
+                </section>
+                <ul>
+                    <li>${item.tags}</li>
+                </ul>
+            </article>
+        </section>
+    </main>
 </body>
 </html>
