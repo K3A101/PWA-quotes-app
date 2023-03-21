@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include("./partials/head");%>
+<%- include("./partials/head.ejs");%>
 
     <body>
 
         <header>
             <!-- De navigatie menu -->
-            <%- include("./partials/nav");%>
+            <%- include("./partials/nav.ejs");%>
         </header>
 
-      <%-include("./partials/page-title")%>
+      <%-include("./partials/page-title.ejs")%>
         <!-- De tags menu en de searchbar -->
-        <%- include("./partials/filter") %>
+        <%- include("./partials/filter.ejs") %>
 
             <main>
                 <section id="content">
@@ -27,6 +27,7 @@
                             <p><%-item.bio%></p>
                         </section>
                         <ul>
+                            <a href="/quotes/<%-item.id%>">Quote<%-item.id%></a>
                             <li><%-item.tags%></li>
                         </ul>
                     </article> 

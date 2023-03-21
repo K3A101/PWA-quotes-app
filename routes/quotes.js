@@ -56,9 +56,9 @@ router.get('/quotes/:id', function (req, res) {
         } else {
             // Render the page using the 'post' view and our body data
             res.render('quote', {
-                title: `quote ${req.params.id}`,
-                pageTitle: `${req.name}`,
-                quoteData: body
+                title: `Quote ${req.params.id}`,
+                pageTitle: `Quote ${req.params.id}`,
+                quoteData: body.quote
             });
         }
     });

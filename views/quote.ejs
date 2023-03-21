@@ -1,37 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include("./partials/head");%>
+<%- include("./partials/head.ejs");%>
 
     <body>
 
         <header>
             <!-- De navigatie menu -->
-            <%- include("./partials/nav");%>
+            <%- include("./partials/nav.ejs");%>
         </header>
 
         <!-- Hier staat de pagina titel -->
-        <%-include(". /partials/page-title")%>
+        <%-include("./partials/page-title.ejs")%>
             <!-- De tags menu en de searchbar -->
 
-
+            <a href="/quotes">Go back</a>
             <main>
                 <section>
-                        <article>
-                            <section>
-                                <q><%-postData.quote%></q>
-                        
-                                <p class="author"><%-post.author%></p>
-                            </section>
-                            <section>
-                                <img src="<%-post.avatar%>" alt="Avatar">
-                                <p><%-post.bio%></p>
-                            </section>
-                            <ul>
-                                <li><%-post.tags%></li>
-                            </ul>
-                        </article>
+                    <article>
+                        <section>
+                            <p><%-quoteData%></p>
+                            <q></q>
+                         
+                          
+                        </section>
+                    </article>
                 </section>
-              
+
             </main>
     </body>
 
