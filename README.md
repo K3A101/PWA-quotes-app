@@ -247,4 +247,172 @@ app.listen(port, () => {
 })
 ```
 ---
+## Routes bestand
+Ik heb mijn routes in een aparte bestand gemaakt. Ik heb de App een een beetje aangepast. Mijn applicatie bestaat uit:
+- Homepagina met een link naar de homepagina
+- Overzichtpagina met alle quotes
+- Detailpagina per quotes
+- Aboutpagina
+
+Alle pagina hebben een eigen routes url. De routes is te vinden in de bestandmap `routes/quotes.js`. 
+
+
+### In de quotes bestand
+
+In quotes.js staat al de routes url voor mijn applicatie. Ik heb ten eerste een express router instantie gemaakt en de URL daaraan gekoppeld. Ik heb verder de requets package die ik heb gedownload met npm in deze bestand geïmporteerd. Hiermee kan ik wat doen met de API url.
+```javascript
+const express = require('express');
+const request = require('request');
+const router = express.Router()
+```
+
+### Routes url
+Verder heb ik per pagina een url gegeven met de `router.get()` methode. 
+
+### Homepagina
+In mijn homepagina is de route een `/` slash dus de root. Dus ik ga een request doen naar de data van de API en wordt gerendered op de index.ejs template pagina.
+
+```javascript
+// /routes/quote,js
+router.get('/', (req,res)=>{
+    request('https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1', { json: true }, (err, requestRes, body) => {
+        if (err) {
+            // We got an error
+            res.send(err);
+        } else {
+
+
+            res.render('index',{
+                title: 'Home',
+                pageTitle: 'Design quotes'
+
+            });
+        }
+    })
+})
+```
+
+```html
+<!-- /views/index.ejs -->
+    <section id="home">
+            <article>
+                <h2>Welcome to Design quotes</h2>
+                <p>An app with quotes from different pupular developers and designers in the world of the web.</p>
+                
+                <a href="/quotes"> Click here to see the quotes</a>
+            </article>
+        </section>
+```
+### Overzichtpagina
+In de overzichtpagina is de route een `/quotes`. Deze pagina heeft een lijst van alle quotes die te vinden zijn in de API. Alle data wordt gerendered in de `quotes.ejs` bestand. Ik heb het een forEach loo gebruikt om alle die data te renderen. 
+
+```javascript
+// /routes/quotes.js
+router.get('/quotes', (req, res) =>{
+    request('https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1', {json:true}, (err, requestRes, body) =>{
+        if (err) {
+            // We got an error
+            res.send(err);
+        } else {
+           
+            // Render the page using the 'quotes' view and our body data
+            res.render('quotes', {
+                title: 'Quotes', // We use this for the page title, see views/partials/head.ejs
+                pageTitle: 'All the quotes',
+                quoteData: body
+            });
+        }
+    })
+})
+
+
+```
+```html
+<!-- /views/quotes.ejs -->
+     <section id="content">
+                    <% quoteData.forEach((item)=> { %>
+                        <article>
+                        <section>
+                            <q><%-item.quote%></q>
+
+                            <p class="author"><%-item.author%></p>
+                        </section>
+                        <section>
+                            <img src="<%-item.avatar%>" alt="Avatar">
+                            <p><%-item.bio%></p>
+                        </section>
+                        <ul>
+                            <a href="/quotes/<%-item.id%>">Quote<%-item.id%></a>
+                            <li><%-item.tags%></li>
+                        </ul>
+                    </article> 
+                    <%})%>
+                   
+                </section>
+
+```
+
+### Detailpagina NOG NIET KLAAR!!
+In de detailpagina h is de route een `/qoutes/:id`. Dit betekent de ID per quotes staat in de url. Dus als je op de link klikt op een van de quotes in de overzichtpaginas. Dan ga je naar de detailpagina van die ene quote. 
+
+```javascript
+router.get('/quotes/:id', function (req, res) {
+    request(`https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1/quotes/${req.params.id}`, { json: true }, function (err, requestRes, body) {
+        if (err) {
+            // We got an error
+            res.send(err);
+        } else {
+            // Render the page using the 'quote' view and our body data
+            res.render('quote', {
+                title: `Quote ${req.params.id}`,
+                pageTitle: `Quote ${req.params.id}`,
+                quoteData: body.quote
+            });
+        }
+    });
+});
+```
+### Aboutpagina
+In mijn aboutpagina is de route  `/about`. In deze pagina staat alleen maar een korte beschrijving over het app.
+
+```javascript
+// /routes/quotes.js
+router.get('/about', (req, res) => {
+    
+    res.render('about', {
+        title: 'About',
+        pageTitle: 'About Design Quotes'
+    });
+    
+})
+```
+
+```html
+<!-- /views/about.ejs -->
+<section id="about">
+
+                <article>
+                    <h2>Over Design quotes</h2>
+                    <p>Design quotes is a single page application where students can view quotes from different design
+                        principles to
+                        gain inspiration for their projects.</p>
+
+                    <p> Design Quotes is made by Keisha Alexander </p>
+                </article>
+
+            </section>
+
+```
+### Routes in de server toevoegen
+Wanneer ik klaar was met de routes, heb ik geexporteerd op deze manier: `module.exports = router;`
+En in mijn app.js heb ik een variabele `quotesRoter` gemaakt waarvan ik de router  inporteerde. Om de compontent te gebruiken heb ik de `app.use()` gebruikt. 
+
+```javascript
+var quotesRouter = require('./routes/quotes');
+//An express zeggen om quotes.js bestand te gebruiken vor quotes router
+app.use('/', quotesRouter);
+```
+
+---
+
 ## Bronnen
