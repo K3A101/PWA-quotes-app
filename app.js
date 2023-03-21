@@ -15,18 +15,6 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'))
 
 
-// // Home pagina
-// app.get('/quotes',  (req, res) => {
-
-//     res.render("index")
-    
-// })
-
-// // About pagina
-// app.get('/about', (req, res) => {
-//     res.render("about")
-    
-// })
 
 // Get our route file
 var postsRouter = require('./routes/quotes');
