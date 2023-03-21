@@ -12,7 +12,8 @@ router.get('/', (req,res)=>{
 
             // Render the page using the 'posts' view and our body data
             res.render('index',{
-                title: 'Home'
+                title: 'Home',
+                pageTitle: 'Design quotes'
 
             });
         }
@@ -29,10 +30,21 @@ router.get('/quotes', (req, res) =>{
             // Render the page using the 'posts' view and our body data
             res.render('quotes', {
                 title: 'Quotes', // We use this for the page title, see views/partials/head.ejs
+                pageTitle: 'All the quotes',
                 postData: body
             });
         }
     })
+})
+
+// About pagina
+router.get('/about', (req, res) => {
+    
+    res.render('about', {
+        title: 'About',
+        pageTitle: 'About Design Quotes'
+    });
+    
 })
 
 // // Create a route for our detail page
