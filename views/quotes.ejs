@@ -15,19 +15,19 @@
 
             <main>
                 <section id="content">
-                    <% postData.forEach((post)=> { %>
+                    <% quoteData.forEach((item)=> { %>
                         <article>
                         <section>
-                            <q><%-post.quote%></q>
+                            <q><%-item.quote%></q>
 
-                            <p class="author"><%-post.author%></p>
+                            <p class="author"><%-item.author%></p>
                         </section>
                         <section>
-                            <img src="<%-post.avatar%>" alt="Avatar">
-                            <p><%-post.bio%></p>
+                            <img src="<%-item.avatar%>" alt="Avatar">
+                            <p><%-item.bio%></p>
                         </section>
                         <ul>
-                            <li><%-post.tags%></li>
+                            <li><%-item.tags%></li>
                         </ul>
                     </article> 
                     <%})%>
