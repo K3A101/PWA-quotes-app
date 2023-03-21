@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head");%>
+
+    <body>
+
+        <header>
+            <!-- De navigatie menu -->
+            <%- include("./partials/nav");%>
+        </header>
+
+        <h3>Quotes</h3>
+        <!-- De tags menu en de searchbar -->
+        <%- include("./partials/filter") %>
+
+            <main>
+                <section id="content">
+                    <% postData.forEach((post)=> { %>
+                        <article>
+                        <section>
+                            <q><%-post.quote%></q>
+
+                            <p class="author"><%-post.author%></p>
+                        </section>
+                        <section>
+                            <img src="<%-post.avatar%>" alt="Avatar">
+                            <p><%-post.bio%></p>
+                        </section>
+                        <ul>
+                            <li><%-post.tags%></li>
+                        </ul>
+                    </article> 
+                    <%})%>
+                   
+                </section>
+            </main>
+    </body>
+
+</html>
