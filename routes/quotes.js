@@ -10,7 +10,7 @@ router.get('/', (req,res)=>{
             res.send(err);
         } else {
 
-            // Render the page using the 'posts' view and our body data
+            
             res.render('index',{
                 title: 'Home',
                 pageTitle: 'Design quotes'
@@ -27,7 +27,7 @@ router.get('/quotes', (req, res) =>{
             res.send(err);
         } else {
            
-            // Render the page using the 'posts' view and our body data
+            // Render the page using the 'quotes' view and our body data
             res.render('quotes', {
                 title: 'Quotes', // We use this for the page title, see views/partials/head.ejs
                 pageTitle: 'All the quotes',
@@ -54,7 +54,7 @@ router.get('/quotes/:id', function (req, res) {
             // We got an error
             res.send(err);
         } else {
-            // Render the page using the 'post' view and our body data
+            // Render the page using the 'quote' view and our body data
             res.render('quote', {
                 title: `Quote ${req.params.id}`,
                 pageTitle: `Quote ${req.params.id}`,
