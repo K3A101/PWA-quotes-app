@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head");%>
+
+    <body>
+
+        <header>
+            <!-- De navigatie menu -->
+            <%- include("./partials/nav");%>
+        </header>
+
+        <!-- Hier staat de pagina titel -->
+        <%-include(". /partials/page-title")%>
+            <!-- De tags menu en de searchbar -->
+
+
+            <main>
+                <section>
+                        <article>
+                            <section>
+                                <q><%-postData.quote%></q>
+                        
+                                <p class="author"><%-post.author%></p>
+                            </section>
+                            <section>
+                                <img src="<%-post.avatar%>" alt="Avatar">
+                                <p><%-post.bio%></p>
+                            </section>
+                            <ul>
+                                <li><%-post.tags%></li>
+                            </ul>
+                        </article>
+                </section>
+              
+            </main>
+    </body>
+
+</html>
