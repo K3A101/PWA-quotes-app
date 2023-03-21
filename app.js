@@ -17,9 +17,9 @@ app.use(express.static('public'))
 
 
 // Get our route file
-var postsRouter = require('./routes/quotes');
-// Tell express to use our posts.js file for /posts routes
-app.use('/', postsRouter);
+var quotesRouter = require('./routes/quotes');
+//An express zeggen om quotes.js bestand te gebruiken vor quotes router
+app.use('/', quotesRouter);
 
 
 
