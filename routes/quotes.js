@@ -57,7 +57,7 @@ router.get('/quotes/:id', function (req, res) {
         .then(function (response) {
             const quotes = response.data;
             const quote = quotes.find(quote => quote.id === id);
-            console.log(response.data);
+           
             if(quote){
                  res.render('quote', {
                 title: `Quote ${id}`,
