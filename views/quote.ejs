@@ -2,7 +2,7 @@
 <html lang="en">
 <%- include("./partials/head.ejs");%>
 
-    <body>
+    <body id="detailpagina">
 
         <header>
             <!-- De navigatie menu -->
@@ -15,18 +15,31 @@
 
             <a href="/quotes">Go back</a>
             <main>
-               
-                    <article>
-                        <section> 
-                             <h2> <%= quoteData.author%></h2>
-                             <q> <%= quoteData.quote %> </q>
-                        </section>
-                        <section>
-                                <img src="<%=quoteData.avatar%>" alt="Een foto van de auteur">
-                                <p><%=quoteData.bio%></p>
-                        </section>
-                    
-                    </article>       
+
+                <article>
+                    <section>
+                        
+                        <img src="<%=quoteData.avatar%>" alt="Een foto van de auteur">
+
+                        <div class="wrapper">
+                            <h2>
+                                <%= quoteData.author%>
+                            </h2>
+                            <p>
+                                <%=quoteData.bio%>
+                            </p>
+                        </div>
+
+
+                    </section>
+                    <section>
+                        <q>
+                            <%= quoteData.quote %>
+                        </q>
+
+                    </section>
+
+                </article>
             </main>
     </body>
 
