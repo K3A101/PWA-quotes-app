@@ -35,6 +35,10 @@ body {
     /* height: 100vh; */
 
 }
+/* Body van de homepagina */
+body.homepagina {
+    margin: 0 1em;
+}
 
 h1,
 h2,
@@ -245,7 +249,7 @@ main {
     width: 100%;
 }
 
-main img {
+main #content img {
     block-size: 4em;
     aspect-ratio: 1;
 }
@@ -278,6 +282,44 @@ main ul li {
     font-weight: 400;
 }
 
+/**************/
+/* HOMEPAGINA */
+/**************/
+main #home article {
+    background-color: var(--grijs);
+    height: 60vh;
+    padding: 2em;
+    border-radius: 3em;
+    position: relative;
+    
+}
+
+
+#home h2 {
+    font-family: var(--quote-text);
+    color: var(--donker-blauw);
+    font-size: 2em;
+    text-align: center;
+    padding-bottom: .5em;
+}
+
+#home p {
+    padding: 0 1em;
+    font-family: var(--paragraaf);
+    text-align: center;
+}
+
+#home a {
+    background-color: var(--donker-blauw);
+    color: var(--grijs);
+    display: inline-block;
+    position: absolute;
+    bottom: 1em;
+    padding: 1em 1.5em;
+   left: 13%;
+   border-radius: 3em;
+   font-family: var(--algemene-text);
+}
 /*****************************/
 /* Quotes pagina*/
 /*****************************/
@@ -328,6 +370,7 @@ main ul li {
     left: 10%;
     color: var(--donker-groen)
 }
+
 
 /*****************/
 /* LOADING STATE */
@@ -444,6 +487,20 @@ body>figure img {
 
     main #content article {
         width: 100%;
+    }
+
+
+    .main-van-home {
+        display: grid;
+        place-content: center;
+    }
+
+    #home article {
+        max-width: 25em;
+    }
+
+    #home a {
+        left: 20%;
     }
 }
 
