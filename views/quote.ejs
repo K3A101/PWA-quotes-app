@@ -15,17 +15,18 @@
 
             <a href="/quotes">Go back</a>
             <main>
-                <section>
+               
                     <article>
-                        <section>
-                            <p></p>
-                            <q><%= quoteData.quote %></q>
-                         
-                          
+                        <section> 
+                             <h2> <%= quoteData.author%></h2>
+                             <q> <%= quoteData.quote %> </q>
                         </section>
-                    </article>
-                </section>
-
+                        <section>
+                                <img src="<%=quoteData.avatar%>" alt="Een foto van de auteur">
+                                <p><%=quoteData.bio%></p>
+                        </section>
+                    
+                    </article>       
             </main>
     </body>
 
