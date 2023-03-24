@@ -8,7 +8,8 @@
     "example": "examples"
   },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "minify": "node uglify.js"
   },
   "repository": {
     "type": "git",
