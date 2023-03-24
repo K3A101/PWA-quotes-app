@@ -12,7 +12,7 @@
     "minify:server": "uglifyjs app.js -c -m -o app.min.js",
     "minify:routerFolder": "uglifyjs-folder ./routes -eo ./routes-output",
     "minify:routerOne": "uglifyjs-folder ./routes -o ./routes-output/routes.min.js",
-    "minify:js": "uglifyjs-folder ./public/script -e ./public/script-output/clientside.min.js"
+    "minify:js": "uglifyjs-folder ./public/script -eo ./public/script-output/clientside.min.js"
 
   },
   "repository": {
