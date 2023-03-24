@@ -1,45 +1,24 @@
 console.log('hello')
-const searchBar = document.getElementById('search');
-const url = 'https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1';
+// Variabele
+import { searchBar, url } from "./modules/variabel.js";
+import { updateFilterData } from "./modules/render.js";
 let newArray = [];
 
+// logica
 filterDataByName()
 
+//functies
 function filterDataByName() {
     fetch(url)
-    .then(response=> response.json())
-    .then(data => {
-        newArray = data;
-        updateFilterData(newArray)
-    })
-    .catch(error => console.error(error))
+        .then(response => response.json())
+        .then(data => {
+            newArray = data;
+            updateFilterData(newArray)
+        })
+        .catch(error => console.error(error))
 }
 
 
-function updateFilterData(data) {
-   const quoteList = document.getElementById('content');
-   quoteList.innerHTML ='';
-   let html = ''
-   data.forEach(item => {
-       html += `
-          <article>
-           <section>
-              <q>${item.quote}</q>
-
-              <p class="author">${item.author}</p>
-            </section>
-            <section>
-              <img src="${item.avatar}" alt="Avatar">
-              <p>${item.bio}</p>
-            </section>
-            <ul>
-              <li>${item.tags}</li>                
-            </ul>             
-          </article>`
-
-   });
-    quoteList.insertAdjacentHTML('beforeend', html);
-}
 
 searchBar.addEventListener('input', () => {
     const query = searchBar.value.toLowerCase();
