@@ -1,6 +1,15 @@
 # Stress relief- quotes - Progressive Web Apps 
 Voor het vak progressive web app, ga ik  mijn  Stess relief qoutes app refatoren naar een server side applicatie. 
 
+# Inhoud
+- [Node en NPM installeren]()
+- [Express Server]()
+- [Routing]()
+- [Template Engine]()
+- [Web App structuur]()
+- [Build Tools]()
+---
+
 ## Applicatie installeren
 Wat heb je nodig:
 - npm
@@ -353,7 +362,7 @@ router.get('/quotes', (req, res) =>{
 ```
 
 ### Detailpagina NOG NIET KLAAR!!
-In de detailpagina h is de route een `/qoutes/:id`. Dit betekent de ID per quotes staat in de url. Dus als je op de link klikt op een van de quotes in de overzichtpaginas. Dan ga je naar de detailpagina van die ene quote. 
+In de detailpagina h is de route een `/qoutes/:id`. Dit betekent de ID per quotes staat in de url. Dus als je  de link klikt via een van de quotes in de overzichtpaginas. Dan ga je naar de detailpagina van die ene quote. 
 
 ```javascript
 router.get('/quotes/:id', function (req, res) {
@@ -371,6 +380,45 @@ router.get('/quotes/:id', function (req, res) {
         }
     });
 });
+```
+
+### Versie 2: Detailpagina
+Ik heb een iteratie gemaakt aan mijn detailpagina. Met de package `request` was het niet mogelijk om een detailpagina te maken op basis van de Id. Want het was een beperking met mij API. Ik heb daardoor een andere pakket gebruikt. Die heet __axios__. Axios lijkt bijna hetzelfde als de fetch API in het client-side. 
+
+Ten eerste heb ik de package geinstalleerd met:
+
+    npm install axios
+
+Het is bijna hetzelfd als de vorige maar hoer heb ik de `request()` verandert met `axios.get()`. Daarin zet ik mijn Url. Verder doe ik een response naar de APi. Ik ga ook opzoek naar id. Als de overeen 
+
+```javascript
+router.get('/quotes/:id', function (req, res) {
+
+    const id = req.params.id;
+    const API_URL = `https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1/`;
+    axios.get(API_URL)
+        .then(function (response) {
+            const quotes = response.data;
+            const quote = quotes.find(quote => quote.id === id);
+           
+            if(quote){
+                 res.render('quote', {
+                title: `Quote ${id}`,
+                pageTitle: `Quote ${id}`,
+                quoteData: quote
+            });
+            }else {
+                res.status(404).send('Quote not found');
+            }
+           
+        })
+        .catch(function (error) {
+            // We got an error
+            console.error(error);
+            res.send(error);
+        });
+});
+
 ```
 ### Aboutpagina
 In mijn aboutpagina is de route  `/about`. In deze pagina staat alleen maar een korte beschrijving over het app.
@@ -415,5 +463,51 @@ app.use('/', quotesRouter);
 
 ---
 ## Build tools
-Build tools zorgt ervoor dat je taken niet elke keer moeten doen. Het vermijd herhalende taken. 
+Build tools automatiseert herhalende taken en optimaliseert de workflow wanneer de applicatie gedeployed is. Build tooling wordt gebruikt meestal :
+- om javascript bestanden te verkleinen en minimaliseren. 
+- Voor CSS preprossesor zoals Sass, less, Stylus.
+- om  Afbeeldingen via een bron te laden
+- Om HTML bestanden prerenderen
+
+Tijdens mijn onderzoek ben tegen verschilldende tools gekomen zoals webpack, grunt, browserfy, parcel, minifyjs, uglifyjs enz. Voor CSS had ik  verschillende preprocessors gevonden zoals SASS,LESS en Stylus. Uiteindelij heb ik uglifyjs en SASS gekozen om verder mee te werken. Ik heb OA  de tooling gekoppeld aan een NPM script. Ik Nu Stap voor stap uitleggen hoe ik had alles gedaan.
+
+## Uglify.js
+uglifyjs is een npm package waar je bestanden kan comprimeren, verkleiner en een verfraaiing. Hier is een link naar de [documentatie](https://github.com/mishoo/UglifyJS).
+
+### Installeren
+Je installeert uglifyjs met `npm install` commando:
+```
+ npm install uglify.js
+```  
+ Ik heb die van mij in de devDependencies geplaats met 
+```
+ npm install uglify.js --save-dev  
+```
+### Hoe je moet het gebruiken?
+Om uglify te gebruiken, moet je de volgende commando in de terminal plaatsen.
+```
+uglifys [input bestand] [options]
+```
+Ten eerste zet je uglify naar voren en daarna bij `[input bestand]`zet je de bestande(n) die je wil minimaliseren. `[options]` zijn taken die je kan doen met de bestand die je wil minimaliseren. Er zijn verschillende keuzes. Het meest gebruikt zijn:
+- -c --compress; bestand comprimeren
+- -m --mangle
+- -o --output <file>; Het geminimaliseerde uitgevoerde bestand. 
+
+Er zijn verschillende soorten taken die je kan toevoegen. Om ze te bekijken moet je `uglifyjs -help` in de terminal plaatsen. 
+
+### Build tools in npm scripts
+Ik heb een paar build tool npm scripts gemaakt, zodat ik makkelijk mijn bestanden kan minimaliseren. 
+
+```json
+
+"minify:server": "uglifyjs app.js -c -m -o app.min.js",
+    "minify:routerFolder": "uglifyjs-folder ./routes -eo ./routes-output",
+    "minify:routerOne": "uglifyjs-folder ./routes -o ./routes-output/routes.min.js",
+    "minify:js": "uglifyjs-folder ./public/script -eo ./public/script-output/clientside.min.js"
+```
+
+Ik heb ten eerste een npm script gemaakt om de server te bundlen als het ooit groot wordt. De script hiervoor is `npm run minify:server`. Als ik dit commando uitvoert, wordt de verkleinde versie opgeslagen in een `app.min.js`. Verder heb ik een extra npm package geinstalleerd: `uglify-folder`. Het zorgt ervoor dat alle bestanden in een bepaalde bestandmap apart wordt gecomprimeerd. Maar er is ook een mogelijkheid om alle bestanden in een bestandmap in een bestand wordt opgeslagen. 
+
+   
+
 ## Bronnen
