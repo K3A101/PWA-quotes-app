@@ -9,7 +9,10 @@
   },
   "scripts": {
     "start": "nodemon app.js",
-    "minify": "node uglify.js"
+    "minify:server": "uglifyjs app.js -c -m -o app.min.js",
+    "minify:routerFolder": "uglifyjs-folder ./routes -eo ./routes-output",
+    "minify:js:client": "uglifyjs-folder ./public/script -eo ./public/script-output"
+
   },
   "repository": {
     "type": "git",
@@ -34,7 +37,6 @@
     "nodemon": "^2.0.21",
     "sass": "^1.59.3",
     "uglify-js": "^3.17.4",
-    "webpack": "^5.76.3",
-    "webpack-cli": "^5.0.1"
+    "uglifyjs-folder": "^3.2.0"
   }
 }
