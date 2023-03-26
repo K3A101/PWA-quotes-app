@@ -24,7 +24,7 @@ Om de server te installeren heb ik node en express gebruikt. Dat doe ik met `nvm
 ```
 nvm install 19.8.1
 ```
-Als je deze commando in je terminal intoets dan installeer je de laatse versie van npm en node.js. Je moet ervoor zorgen dat je allemaal installeer in je root van je app folder.
+Als je deze commando in je terminal intoets dan installeer je de laatse versie van npm en node.js. Je moet ervoor zorgen dat je ze allemaal installeer in je root van je app folder.
 
 #### 2. Versie bekijken
 Om  te kijken of je de juiste versie hebt moet je achter de pakketnaam een -v toevoegen. 
@@ -39,7 +39,7 @@ node -v
 
 ### NPM Package installeren
 #### Package.json opzetten
-Om een package.json te installeren gebruik je de commando `npm init`. Als output krijg je bepaalde vragen waar je gegevens die je moet invullen. Zoals de naam van de applicatie, maker van de applicatie, applicatie versie, licentie, repo, geïnstalleerde npm packages etc. Hieronder ziet u een voorbeeld van wat er staat in mijn package.json bestand.
+Om een package.json te installeren gebruik je de commando `npm init`. Als output krijg je aantal vragen die je moet invullen. Zoals de naam van de applicatie, maker van de applicatie, applicatie versie, licentie, repo, geïnstalleerde npm packages etc. Hieronder ziet u een voorbeeld van wat er staat in mijn package.json bestand.
 
 ```
 {
@@ -97,6 +97,8 @@ Als de applicatie eenmaal klaar is en je wilt hem gebruiken dan moet je alleen `
 
 
 #### Server starten
+Om de server te starten moet je deze commando onderaan uitvoeren:
+
     npm start
 
 ---
