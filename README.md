@@ -508,6 +508,69 @@ Ik heb een paar build tool npm scripts gemaakt, zodat ik makkelijk mijn bestande
 
 Ik heb ten eerste een npm script gemaakt om de server te bundlen als het ooit groot wordt. De script hiervoor is `npm run minify:server`. Als ik dit commando uitvoert, wordt de verkleinde versie opgeslagen in een `app.min.js`. Verder heb ik een extra npm package geinstalleerd: `uglify-folder`. Het zorgt ervoor dat alle bestanden in een bepaalde bestandmap apart wordt gecomprimeerd. Maar er is ook een mogelijkheid om alle bestanden in een bestandmap in een bestand wordt opgeslagen. 
 
-   
+## SASS
+Sass is een css preprocessor. Sass wordt gebruikt wanneer de css stylesheet groot wordt en moeilijk wordt om te behandelen. Het zorgt ervopr dat de css leesbaar blijft. Sass komt met verschillende functionaliteiten die niet te vinden is in normale css. Functionaliteiten zoals nesten,  mixins and inheritance.
+
+### Sass installeren
+Ik heb Sass in mijn terminal geinstalleerd met npm.
+
+    npm install sass --save-dev
+
+Ik de package in mijn devDependencie geinstalleerd. 
+
+
+### Sass gebruiken
+Om Sass te gebruiken moet u de bestand extensie zetten als`.scss`. Hierin kun je de functionaliteiten gebruiken. Daarna voer je een commando in die ervoor zorgt dat de Scss bestand naar wordt omgezet naar css want de browser kan alleen css lezen. De commando die ik moet uitvoeren is:
+
+
+```npm
+sass --watch style-test.scss output.css
+
+```
+Hiermee wordt de scss bestand compiled naar css met de bestandnaam output.css.
+
+### Functionaliteit met sass
+
+### Nesten
+Elementen die bij elkaar horen kunnen genest worden onder een parent element. Ik kan een voorbeeld in mijn project. 
+
+```scss
+// styles.scss 
+/**********/
+/* HEADER */
+/**********/
+header {
+    width: 100%;
+    display: grid;
+    align-items: end;
+    position: relative;
+    /* height: 30vh; */
+    gap: 2em;
+
+ section:nth-of-type(1) {
+    display: flex;
+
+    align-items: center;
+    gap: .5em;
+}
+
+ section:nth-of-type(1) h1 {
+    font-size: 1em;
+    align-self: flex-end;
+    /* color: var(--donker-blauw) */
+}
+
+ section:nth-of-type(1) img {
+    width: 3em;
+    height: 3em;
+    aspect-ratio: 1;
+}
+
+
+}
+
+```
+
 
 ## Bronnen
+- https://sass-lang.com/guide
