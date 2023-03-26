@@ -54,10 +54,9 @@ router.get('/quotes/:id', function (req, res) {
     const id = req.params.id;
     const API_URL = `https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1/`;
     axios.get(API_URL)
-        .then(function (response) {
+        .then( (response) =>{
             const quotes = response.data;
             const quote = quotes.find(quote => quote.id === id);
-           
             if(quote){
                  res.render('quote', {
                 title: `Quote ${id}`,
