@@ -16,7 +16,8 @@ export function updateFilterData(data) {
               <p>${item.bio}</p>
             </section>
             <ul>
-              <li>${item.tags}</li>                
+              <li>${item.tags}</li> 
+                     
             </ul>             
           </article>`
 
