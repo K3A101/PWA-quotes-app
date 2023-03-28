@@ -572,7 +572,64 @@ header {
 }
 
 ```
+---
 
+## Maak het project een Progressive Web App.
+In de volegnde opdracht heb ik mijn applicatie omgezet in een progressive Web App(PWA). Dus ik zorgde ervoor dat ik mijn app kan  installeren via mijn browser naar mijn lokale computer. De voordelen van PWA zijn:
+- Het is snel 
+- De app kan offline gebruikt worden
+- Je kan het installeren op de homescherm van je telefoon of desktop op je laptop
+- Je krijgt push notificatie als iets in de achtergrond van de App is gebeurd
+
+
+## Hoe maak ik de App een PWA/ installeerbaar
+Om de App om te zetten in een PWA moet je de volgende dingen hebben namelijk,
+- HTTPS
+- Service Worker
+- Manifest.json bestand
+
+
+### Dev tools in Chrome
+
+### Applicatie tab
+In Chrome als je op de applicatie tab gaat kun je bekijken of er wel een manifest.json bestand heeft in je applicatie. Ook kun je informatie vinden over de server worker etc. 
+
+### Lighthouse
+In de lighthouse tab ga de browser je applicatie beordelen of je bepaalde riteria behaald zoals seo, toegankelijkheid, performance, Best practices en Progressive Web App. Als je bepaalde criteria niet voldoet dan krijg  je oplossing om die te verbeteren.
+
+
+## Manifest.json
+De Manifest bestand is een json bestand met bepaalde nformatie die je moet invullen voor de PWA. Het verteld de browser hoe de app moet gedragen als die geïnstalleerd is.
+
+### Hoe maak je een manifest bestand?
+Ten eerste maak je een bestand in de root van de project. Mijn applicatie is server-side gerendered dus ik heb de van mij in de root gezet van de public bestand. Verder heb ik een bestand gemaakt die heet `manifest.json`. In de Manifest.json enkele object properties. 
+Properties die je tenminste moet hebben in je manifest bestand zijn:
+- `short_name` - Korte naam van de applicatie
+- `name` - Volledige naam van de applicatie
+- `icons` - de thumbnail die je ziet bij de homescherm
+- `display`, hoe die moet eruit zien. (standalone, fullscreen, minimal-ui)
+
+
+```json
+// manifest.json
+{
+    "name": "Design Quotes for students",
+    "short_name": "Design Quotes",
+    "start_url": "/",
+    "scope":"/",
+    "display":"standalone",
+    "background_color": "#75B6A2",
+    "theme_color": "#75B6A2",
+    "orientation":"portrait-primary",
+    "icons": []
+
+
+```
+## Manifest bestand verbinden
+Om de manifest bestand te koppelen aan de app moet je die zetten in de `<link>` van je html pagina's.
+```html
+ <link rel="manifest" href="/manifest.json">
+```
 
 ## Bronnen
 - https://sass-lang.com/guide
