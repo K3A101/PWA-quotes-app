@@ -1,11 +1,12 @@
 const express = require('express');
 const request = require('request');
 const axios = require('axios');
+const API_URL = 'https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1';
 
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    request('https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1', { json: true }, (err, requestRes, body) => {
+    request(API_URL, { json: true }, (err, requestRes, body) => {
         if (err) {
             // We got an error
             res.send(err);
@@ -22,7 +23,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/quotes', (req, res) => {
-    request('https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1', { json: true }, (err, requestRes, body) => {
+    request(API_URL, { json: true }, (err, requestRes, body) => {
         if (err) {
             // We got an error
             res.send(err);
@@ -52,7 +53,6 @@ router.get('/about', (req, res) => {
 router.get('/quotes/:id', function (req, res) {
 
     const id = req.params.id;
-    const API_URL = `https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1/`;
     axios.get(API_URL)
         .then( (response) =>{
             const quotes = response.data;
@@ -75,24 +75,18 @@ router.get('/quotes/:id', function (req, res) {
         });
 });
 
+// Filter functie
+router.get('/search', (req, res)=>{
+    res.send('test');
 
-// router.get('/quotes/:id', function (req, res) {
-//     const id=req.params.id;
-//     request(`https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1/${id}`, { json: true }, function (err, requestRes, body) {
-//         if (err) {
-//             // We got an error
-//             res.send(err);
-//         } else {
-//             console.log(body)
-//             // Render the page using the 'quote' view and our body data
-//             res.render('quote', {
-//                 title: `Quote ${id}`,
-//                 pageTitle: `Quote ${id}`,
-//                 quoteData: body
-//             });
-//         }
-//     });
-// });
+})
+
+// De offline pagina
+router.get('/offline', (req, res)=> {
+   res.render('offline', {
+    title: 'Offline'
+   })
+})
 
 // Make sure to export the router so it becomes available on imports
 module.exports = router;
