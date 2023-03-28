@@ -630,6 +630,11 @@ Om de manifest bestand te koppelen aan de app moet je die zetten in de `<link>` 
 ```html
  <link rel="manifest" href="/manifest.json">
 ```
+Als je naar de Applicatie browser gaat, dan kun de informatie die je hbe ingevuld terug zien.
+
+---
+
+## Service Worker
 
 ## Bronnen
 - https://sass-lang.com/guide
