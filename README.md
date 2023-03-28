@@ -613,15 +613,15 @@ Properties die je tenminste moet hebben in je manifest bestand zijn:
 ```json
 // manifest.json
 {
-    "name": "Design Quotes for students",
-    "short_name": "Design Quotes",
-    "start_url": "/",
+    "name": "Design Quotes for students", //volledige app naam
+    "short_name": "Design Quotes", //korte app naam
+    "start_url": "/", //waar de pagina begint 
     "scope":"/",
     "display":"standalone",
-    "background_color": "#75B6A2",
-    "theme_color": "#75B6A2",
+    "background_color": "#75B6A2", //kleur van bar bovenaan
+    "theme_color": "#75B6A2", //achtergrond kleur wanneer de app offline is
     "orientation":"portrait-primary",
-    "icons": []
+    "icons": [] //iconen voor de app
 
 
 ```
