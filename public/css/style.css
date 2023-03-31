@@ -77,7 +77,9 @@ a:hover,
 a:active,
 a:focus-visible,
 a:focus {
+    
     color: var(--grijs);
+   
 }
 
 a:focus {
@@ -85,6 +87,12 @@ a:focus {
     outline-width: 2px;
     outline-style: none;
 }
+
+main a:hover {
+    --donker-blauw: #4e5b92;
+ background-color: var(--donker-blauw);
+}
+
 
 /**********/
 /* HEADER */
@@ -365,6 +373,17 @@ main #home article {
     bottom: 10%;
 }
 
+#content ul  a{
+bottom: 1em;
+font-family: var(--algemene-text);
+position: absolute;
+right: 2em;
+background-color: var(--donker-blauw);
+color: var(--grijs);
+padding: .5em;
+border-radius: 2em;
+}
+
 /* Tags */
 #content li {
     position: absolute;
@@ -389,6 +408,10 @@ main #home article {
     border-radius: 3em;
 }
 
+
+#detailpagina > a:hover{
+background-color: var(--donker-blauw);
+}
 #detailpagina main {
     /* width: 100%; */
     display: flex;
@@ -508,6 +531,43 @@ main #home article {
 }
 
 /******************/
+/* OFFLINE PAGINA */
+/******************/
+#offline-pagina {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    justify-content: center;
+}
+
+/* main {
+  display: grid;
+  gap: 1em;
+} */
+
+#offline-pagina h1 {
+    font-size: 3em;
+}
+
+
+#offline-pagina p {
+    font-family: var(--paragraaf);
+    font-size: 1em;
+}
+
+#offline-pagina a {
+    font-family: var(--algemene-text);
+    display: inline-block;
+    text-decoration: none;
+    padding: 1em 1.5em;
+    background-color: #2e3553;
+    color: white;
+    border-radius: 4em;
+    width: fit-content;
+    margin: 1.5em 0;
+}
+
+/******************/
 /* SWIPE ANIMATIE */
 /******************/
 body>figure img {
@@ -613,3 +673,4 @@ body>figure img {
     }
 
 }
+
