@@ -77,7 +77,8 @@ router.get('/quotes/:id', function (req, res) {
 
 // Filter functie
 router.get('/search', (req, res)=>{
-    res.send('test');
+  
+ res.send('test');
 
 })
 
