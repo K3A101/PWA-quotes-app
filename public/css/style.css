@@ -540,10 +540,9 @@ background-color: var(--donker-blauw);
     justify-content: center;
 }
 
-/* main {
-  display: grid;
-  gap: 1em;
-} */
+#offline-pagina main {
+  height: revert;
+}
 
 #offline-pagina h1 {
     font-size: 3em;
