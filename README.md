@@ -316,6 +316,7 @@ router.get('/', (req,res)=>{
 ```
 ### Overzichtpagina
 In de overzichtpagina is de route een `/quotes`. Deze pagina heeft een lijst van alle quotes die te vinden zijn in de API. Alle data wordt gerendered in de `quotes.ejs` bestand. Ik heb het een forEach loo gebruikt om alle die data te renderen. 
+![Overzichtpagina](./public/images/overzichtpagina.png)
 
 ```javascript
 // /routes/quotes.js
@@ -386,6 +387,7 @@ router.get('/quotes/:id', function (req, res) {
 
 ### Versie 2: Detailpagina
 Ik heb een iteratie gemaakt aan mijn detailpagina. Met de package `request` was het niet mogelijk om een detailpagina te maken op basis van de Id. Want het was een beperking met mij API. Ik heb daardoor een andere pakket gebruikt. Die heet __axios__. Axios lijkt bijna hetzelfde als de fetch API in het client-side. 
+![Detailpagina](./public/images/detailpagina.png)
 
 Ten eerste heb ik de package geinstalleerd met:
 
@@ -424,6 +426,7 @@ router.get('/quotes/:id', function (req, res) {
 ```
 ### Aboutpagina
 In mijn aboutpagina is de route  `/about`. In deze pagina staat alleen maar een korte beschrijving over het app.
+![aboutpagina](./public/images/aboutpagina.png)
 
 ```javascript
 // /routes/quotes.js
@@ -574,7 +577,7 @@ header {
 ```
 ---
 
-## Maak het project een Progressive Web App.
+## Maak de applicatie een Progressive Web App.
 In de volegnde opdracht heb ik mijn applicatie omgezet in een progressive Web App(PWA). Dus ik zorgde ervoor dat ik mijn app kan  installeren via mijn browser naar mijn lokale computer. De voordelen van PWA zijn:
 - Het is snel 
 - De app kan offline gebruikt worden
@@ -666,11 +669,100 @@ Service workers gedragen als een proxy server tussen de web applicatie, de brows
 Ik heb in de root van mijn public bestand, de `sw.js`, bestand gemaakt. Als ik niet server side hoefde te werken, moest ik gewoon in de root van mijn applicatie werken. 
 
 ### Stap 2: Service worker registreren 
-Verder moet je service worker registreren, zodat de browser weet dat dit web app een service worker bevat. Dus Om de service worker te registreren heb ik de 
+Verder moet je de service worker registreren, zodat de browser weet dat dit web app een service worker bevat. Wat ik heb gedaan is een partails bestand gemaakt met daarin de registratie script. Vervolgens heb ik met de `include()` methode deze stukje code in al mijn pagina's geplaatst.
+
+```html
+<script>
+    if('serviceWorker' in navigator){
+        navigator.serviceWorker.register('/sw.js')
+        .then((reg) => console.log('Service worker registered', reg))
+        .catch((err)=> console.log('Service worker not registered', err))  
+    }   
+</script>
+```
+Deze functie stuurt een bericht naar de console dat die geregistreerd is. IK geef aan welke bestand de server worker is. 
 
 
+### Onderdelen van de server worker
+Een server is event gebaseerd. Het bestaat uit drie events, de install event, de activate event en de fetch event. In de install event wordt de server worker geinstalleerd. Hier wordt ook de precaching gedaan. Verder heb je de activate event,hier wordt de service worker geactiveerd en klaar gemaakt om request en response te nemen. En Als laatste heb je de fetch event. In deze event wordt de opgeslagen data opgehaald en gerendered op de pagina of gaat terug naar de offline fallback pagina.
 
+### Stap 4: Service worker bestand opstellen
 
+### Precaching install event
+De precaching  wordt gedaan in de install event. Ik heb twee constante variabele. De `CORE_CACHE_NAME` is de versie naam van de service worker/cache en de `CORE_ASSETS` zijn de statische bestanden die ik van te voren wil cachen zodat die beschikbaar zijn wanneer de gebruiker geen internet verbinding heeft. Statisch bestanden zijn voor css, client-side javascript, fonts ect. 
+
+```javascript
+const CORE_CACHE_NAME = 'cache-v1';
+const DYNAMIC_CACHE_NAME ='dynamic-cache-v1';
+const CORE_ASSETS = [
+    '/',
+    '/offline',
+    '/css/style.css',
+    'https://fonts.googleapis.com/css2?family=Gloock&family=Inter:wght@300;400;700&family=Josefin+Sans:wght@300;400;500;700&display=swap',
+    'https://fonts.gstatic.com/s/gloock/v1/Iurb6YFw84WUY4NJhRakNrc.woff2',
+    'https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa2JL7SUc.woff2'  
+];
+
+// install service worker
+self.addEventListener('install', event => {
+    console.log('service worker has been installed');
+    event.waitUntil(
+        caches.open(CORE_CACHE_NAME)
+        .then(cache =>cache.addAll(CORE_ASSETS))
+         .then(() => self.skipWaiting())
+    );   
+});
+```
+- `skipWaiting()`
+- `waitUntil()`
+- `self` is de service worker zelf
+### Serve from cache met fetch event
+Met de fetch event haal ik de data uit de cache. Dus wanneer de gebruiker de pagina benadert wordt de url ogeslagen in de `DYNAMIC_CACHE_NAME`. Dus wanneer er geen internetverbinding is het offline mogelijk om de pagina's te gebruiken. Bij de niet opgeslagen url is het onmogelijk om de pagina te gebruiken als je offline bent. In dit geval krijgen deze pagina een offline fallbackpagina
+![offlinepagina](./public/images/fallbackpagina.png).
+
+```javascript
+self.addEventListener('fetch', event => {
+   event.respondWith(
+    caches.match(event.request).then(cacheRes =>{
+        return cacheRes || fetch(event.request)
+        .then(fetchRes => {
+            return caches.open(DYNAMIC_CACHE_NAME)
+            .then(cache => {
+                cache.put(event.request.url, fetchRes.clone());
+                return fetchRes;
+            })
+        });
+    }).catch(() =>{
+        if (event.request.headers.get('accept').includes('text/html')) {
+            return caches.match('/offline')
+        }
+    })
+   );
+    console.log('fetch event', event);
+});
+
+```
+
+### Cache schone maken met activate event 
+In de activate wordt de server worker geactiveerd wanneer het klaar is met installeren. Ik heb een functie geschreven waar ode cache versie verwijdert wordt en door het nieuwe verplaatst worden. Hieronder staat mijn code:
+
+```javascript
+self.addEventListener('activate', (event) => {
+    event.waitUntil(
+        caches.keys()
+            .then(cacheNames => {
+                return Promise.all(
+                    cacheNames.map(cacheName => {
+                        if (cacheName !== CORE_CACHE_NAME && cacheName !== DYNAMIC_CACHE_NAME) {
+                            return caches.delete(cacheName);
+                        }
+                    })
+                )
+            })
+    )
+
+```
+Als de oude caches niet matchen dan wordt de oude versie verwijdert.
 
 ---
 
