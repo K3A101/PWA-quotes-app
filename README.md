@@ -635,6 +635,46 @@ Als je naar de Applicatie browser gaat, dan kun de informatie die je hbe ingevul
 ---
 
 ## Service Worker
+Het volgende stap om mijn prototype een progressive web app te maken, heb ik een service worker geinstalleerd. Voordat ik aan het werk ging, heb ik een Job Story bedacht om een richtlijn te krijgen van de stappen die ik moet nemen. 
+
+### Job Story
+> Wanneer ik in de trein zit en geen goed internetverbinding hebt, wil ik alsnog de lijst met citaten zien, zodat ik onderweg nog steeds inspiratie kunnen krijgen voor mijn schoolprojecten. 
+
+
+## Wat is een service worker?
+Service workers gedragen als een proxy server tussen de web applicatie, de browser en de network(met verbinding).
+ Hun taak zijn:
+- Een goed offline ervaring te creëren.
+- Kijken naar request en reponse tussen de server en de client.
+- Geef toegang voor push meldingen.
+
+
+### Kenmerken van een service worker
+- Het is een web API
+- Het is geschreven met javascript
+- Werkt in de achtergrond
+- Staat in een aparte lijn ten opzichte de server en de client
+- Het event gebasseerd
+- Heeft geen toegang tot Document Object Model
+- Kan geen javascript modules importeren
+- Ze draaien alleen op HTTPS vanwege beveiliging. 
+
+
+## Hoe werkt het allemaal?
+
+### Stap 1: Service worker bestand maken
+Ik heb in de root van mijn public bestand, de `sw.js`, bestand gemaakt. Als ik niet server side hoefde te werken, moest ik gewoon in de root van mijn applicatie werken. 
+
+### Stap 2: Service worker registreren 
+Verder moet je service worker registreren, zodat de browser weet dat dit web app een service worker bevat. Dus Om de service worker te registreren heb ik de 
+
+
+
+
+
+---
 
 ## Bronnen
 - https://sass-lang.com/guide
+- https://www.youtube.com/watch?v=4XT23X0Fjfk&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&ab_channel=TheNetNinja
+- https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
