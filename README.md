@@ -743,7 +743,7 @@ self.addEventListener('fetch', event => {
 
 ```
 
-### Cache schone maken met activate event 
+### Cache verschonen met het activate event 
 In de activate wordt de server worker geactiveerd wanneer het klaar is met installeren. Ik heb een functie geschreven waar ode cache versie verwijdert wordt en door het nieuwe verplaatst worden. Hieronder staat mijn code:
 
 ```javascript
@@ -776,11 +776,17 @@ Om de critical rendering path te optimaliseren, zijn er verschillende technieken
 - Optimaliseer afbeeldingen door ze te comprimeren, het gebruik van afbeeldingsformaten te optimaliseren en afbeeldingen te schalen naar de juiste afmetingen.
 - Gebruik asynchrone laadtechnieken: Het gebruik van asynchrone laadtechnieken zoals lazy loading en het laden van scripts aan het einde van de pagina kan de laadtijd verbeteren.
 
+### Hoe kon ik de performance van me applicatie testen? 
+Om de performance van de app te testen, heb ik de dev tools in de browser gebruikt. De eerste is lighthouse. Lighthouse maakt een analyse en geef je een score terug. Onderaan zijn er bepaalde criteria's die je moet voldoen om de performance te verhogen. Het volgende functionaliteit is de netwerk tab, hier kan je informatie vinden van je http request. Het laatste onderdeel is de applicatie tab, hier zijn de browser API's. Voor deze vak moest ik alleen kijken, bij de manifest, Service Worker en de Cache Storage. 
+
+
+
 
 
 
 ## Hoe heb ik de critical rendering path beter gemaakt? 
-Om de critical rendering path te verbeteren, heb ik een aantal dingen gedaan:
+Voor mijn critical rendering path wil ik de percieved load speed optimaliseren en de runtime responsiveness. 
+Om de critical rendering path te verbeteren en optimaliseren, heb ik een aantal dingen gedaan:
 
 ### 1. CSS minimaliseren
 De eerste wat ik heb gedaan is de css, minimaliseren. Ik heb een plugin van vscode gebruikt. Maar de plugin is hetzelfde als de build tool van uglifyjs. Wat dit doet, is het haal alle witruimte en zet alle css properties op een lijn. 
@@ -812,12 +818,64 @@ app.use(minifyHTML({
 ### Lazy Loading voor afbeelding
 Mijn prototype gebruikt veel afbeeldingen en het zorgt ervoor dat de afbeeldingen niet meteen geladen wordt maar wanneer het echt noodzakkelijk is. Wat ik heb gedaan is bij de `<img>` heb ik de `loading="lazy"` geplaatst. Het zorgde ervoor dat de pagina snel laad. Ja want in mijn applicatie is de citaten dat belangrijk zijn en niet de afbeeldingen. Dus als die later geladen wordt is het niet erg. 
 
-## Hoe kon ik het testen? 
+
+### Font subsetting
+Ik heb custom fonts van google fonts gebruikt in mijn app. Deze lettertypes zijn belangrijk want het onderscheid de type informatie die ik wil aan de gebruiker laten zien. 
+Toe ik mijn app teste, heb ik gemerkt dat voordat het pagina geladen wordt, kon je de fonts niet zien. Als er iemand de app zou gebruiken met een trage apparaat en internetverbinding, dan kunnen de app meemaken zonder lettertype. Dit fenomeen heet de foit (Flash of invisible text). Om foit te voorkomen moest ik de css property `@font-face` gebruiker per lettertype met daarbij `font-display: swap`.
+
+![foit](public/images/font-display-swap.png)
+
+Ik heb dus de google fonts geinstalleerd en in fontsquirrel een webfont ervan gemaakt. Verder heb ik de fonts in de font-face property geplaats met de font-display.
+
+Want het doe is voordat de pagina klaar is met laden, wordt eerst de systeem fonts gerendered en nadat de pagina wordt geladen wordt de systeem fonts verandert (swap) met de custom fonts.
+
+```css
+
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url(../fonts/josefinsans-bold-webfont.woff2) format(woff2);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Josefin Sans Regular';
+    src: url(../fonts/josefinsans-regular-webfont.woff2) format(woff2);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gloock';
+    src: url(../fonts/gloock-regular-webfont.woff2) format(woff2);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(../fonts/inter-variablefont_slntwght-webfont.woff2) format(woff2);
+    font-display: swap;
+}
+
+```
+Dit is het resultaat nadat ik dit heb gedaan.
+![foit](public/images/font-face.png)
+### Caching control
+Caching control is een methode die wordt gebruikt om de cache-instellingen van een webpagina of een ander bestand op een webserver te beheren. Wanneer een browser een webpagina bezoekt, wordt een kopie van de pagina opgeslagen in de cache van de browser om de laadtijd van toekomstige bezoeken aan die pagina te versnellen...
+
+De code die ik hiervoor had gebruikt:
+```javascript
+let options = { maxAge: '2y' }
+app.use(express.static('public', options))
+```
 
 
-
+---
 
 ## Bronnen
 - https://sass-lang.com/guide
 - https://www.youtube.com/watch?v=4XT23X0Fjfk&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&ab_channel=TheNetNinja
 - https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
+- https://web.dev/why-speed-matters/
+- https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
+- https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path
+- https://github.com/mishoo/UglifyJS#readme
+- https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json
