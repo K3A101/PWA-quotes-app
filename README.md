@@ -765,6 +765,17 @@ self.addEventListener('activate', (event) => {
 Als de oude caches niet matchen dan wordt de oude versie verwijdert.
 
 ---
+# Critical rendering path
+Wat is critical rendering path?
+
+
+## Hoe heb ik de rendering path beter gemaakt? 
+
+
+## Hoe kon ik het testen? 
+
+
+
 
 ## Bronnen
 - https://sass-lang.com/guide
