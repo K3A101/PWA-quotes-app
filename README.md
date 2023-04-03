@@ -763,14 +763,54 @@ self.addEventListener('activate', (event) => {
 
 ```
 Als de oude caches niet matchen dan wordt de oude versie verwijdert.
+## Activity Flow van de Service worker
+
 
 ---
 # Critical rendering path
-Wat is critical rendering path?
+Wat is critical rendering path?  De critical rendering path verwijst naar het proces van het weergeven van een webpagina in de browser, vanaf het moment dat de gebruiker een URL invoert totdat de pagina volledig is geladen. Het optimaliseren van de critical rendering path is belangrijk omdat het de laadtijd van een pagina beïnvloedt, wat op zijn beurt van invloed kan zijn op de gebruikerservaring en zoekmachine ranking.
+
+Om de critical rendering path te optimaliseren, zijn er verschillende technieken en best practices die kunnen worden geïmplementeerd. Enkele voorbeelden hiervan zijn:
+- Code Minimaliseren
+- Bestanden comprimeren
+- Optimaliseer afbeeldingen door ze te comprimeren, het gebruik van afbeeldingsformaten te optimaliseren en afbeeldingen te schalen naar de juiste afmetingen.
+- Gebruik asynchrone laadtechnieken: Het gebruik van asynchrone laadtechnieken zoals lazy loading en het laden van scripts aan het einde van de pagina kan de laadtijd verbeteren.
 
 
-## Hoe heb ik de rendering path beter gemaakt? 
 
+
+## Hoe heb ik de critical rendering path beter gemaakt? 
+Om de critical rendering path te verbeteren, heb ik een aantal dingen gedaan:
+
+### 1. CSS minimaliseren
+De eerste wat ik heb gedaan is de css, minimaliseren. Ik heb een plugin van vscode gebruikt. Maar de plugin is hetzelfde als de build tool van uglifyjs. Wat dit doet, is het haal alle witruimte en zet alle css properties op een lijn. 
+Ik heb een voorbeeld laten zien van mijn prototype met en zonder geminimaliseerde css.
+
+![Normale css](public/images/css-norm-2.png)
+![Geminimaliseerde Css](public/images/css-minify-2.png)
+
+### 2. HTML minimaliseren
+Om de html te minimaliseren heb ik gebruikt gemaakt van express-minify-html. Het is een express middleware die je in de express server kan toevoegen met de `app.use` instantie. Verder kun je bepaalde opties geven die hij moet rekening houden tijdens het minimalisatie. Hier is de code die ik heb daarvoor gebruikt. 
+
+```javascript
+const minifyHTML = require('express-minify-html');
+
+app.use(minifyHTML({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes: true,
+        removeEmptyAttributes: true,
+        minifyJS: true
+    }
+}));
+
+```
+### Lazy Loading voor afbeelding
+Mijn prototype gebruikt veel afbeeldingen en het zorgt ervoor dat de afbeeldingen niet meteen geladen wordt maar wanneer het echt noodzakkelijk is. Wat ik heb gedaan is bij de `<img>` heb ik de `loading="lazy"` geplaatst. Het zorgde ervoor dat de pagina snel laad. Ja want in mijn applicatie is de citaten dat belangrijk zijn en niet de afbeeldingen. Dus als die later geladen wordt is het niet erg. 
 
 ## Hoe kon ik het testen? 
 
