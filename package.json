@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "dev":"nodemon app.js",
+    "dev": "nodemon app.js",
     "minify:server": "uglifyjs app.js -c -m -o app.min.js",
     "minify:routerFolder": "uglifyjs-folder ./routes -eo ./routes-output",
     "minify:routerOne": "uglifyjs-folder ./routes -o ./routes-output/routes.min.js",
@@ -32,6 +32,7 @@
     "axios": "^1.3.4",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-minify-html": "^0.12.0",
     "request": "^2.88.2"
   },
   "devDependencies": {
