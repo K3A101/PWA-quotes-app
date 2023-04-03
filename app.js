@@ -15,6 +15,14 @@ app.set('view engine', 'ejs');
 
 //Gebruikt de public folder
 app.use(express.static('public', options))
+
+
+
+// Get our route file
+var quotesRouter = require('./routes/quotes');
+//An express zeggen om quotes.js bestand te gebruiken vor quotes router
+app.use('/', quotesRouter);
+
 app.use(minifyHTML({
     override: true,
     exception_url: false,
@@ -27,14 +35,6 @@ app.use(minifyHTML({
         minifyJS: true
     }
 }));
-
-
-// Get our route file
-var quotesRouter = require('./routes/quotes');
-//An express zeggen om quotes.js bestand te gebruiken vor quotes router
-app.use('/', quotesRouter);
-
-
 
 app.listen(port, () => {
     console.log(`Example app listening on  http://localhost:${port}`)
