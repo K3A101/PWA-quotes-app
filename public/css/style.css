@@ -1,3 +1,26 @@
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url(../fonts/josefinsans-bold-webfont.woff2) format(woff2);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Josefin Sans Regular';
+    src: url(../fonts/josefinsans-regular-webfont.woff2) format(woff2);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gloock';
+    src: url(../fonts/gloock-regular-webfont.woff2) format(woff2);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(../fonts/inter-variablefont_slntwght-webfont.woff2) format(woff2);
+    font-display: swap;
+}
 *,
 *::before,
 *::after {
@@ -16,6 +39,7 @@
     --lichte-groen: #99C7B9;
     --zwart: #202020;
     --algemene-text: 'Josefin Sans', sans-serif;
+    --josefin-sans-regular:'Josefin Sans Regular', sans-serif;
     --quote-text: 'Gloock', serif;
     --paragraaf: 'Inter', sans-serif;
     --tags-drop-shadow: drop-shadow(.1em .2em .1em rgba(36, 36, 36, 0.497));
@@ -287,7 +311,7 @@ main #content article {
 }
 
 main ul li {
-    font-family: var(--algemene-text);
+    font-family: var(--josefin-sans-regular);
     font-weight: 400;
 }
 
@@ -327,7 +351,7 @@ main #home article {
     padding: 1em 1.5em;
     left: 13%;
     border-radius: 3em;
-    font-family: var(--algemene-text);
+    font-family: var(--josefin-sans-regular);
 }
 
 /*****************************/
@@ -375,7 +399,7 @@ main #home article {
 
 #content ul  a{
 bottom: .5em;
-font-family: var(--algemene-text);
+font-family: var(--josefin-sans-regular);
 position: absolute;
 left: 9em;
 background-color: var(--donker-blauw);
@@ -400,7 +424,7 @@ border-radius: 2em;
 }
 
 #detailpagina>a {
-    font-family: var(--algemene-text);
+    font-family: var(--josefin-sans-regular);
     display: inline-block;
     width: fit-content;
     background-color: var(--grijs);
