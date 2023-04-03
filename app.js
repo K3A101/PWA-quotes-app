@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 const port = 5000;
 const path = require("path");
+let options = { maxAge: '2y' }
 // Setup de template engine ejs
 app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
@@ -12,7 +13,7 @@ app.set('view engine', 'ejs');
 
 
 //Gebruikt de public folder
-app.use(express.static('public'))
+app.use(express.static('public', options))
 
 
 
