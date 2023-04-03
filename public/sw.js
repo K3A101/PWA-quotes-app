@@ -65,32 +65,3 @@ self.addEventListener('fetch', event => {
    
     console.log('fetch event', event);
 });
-// self.addEventListener('fetch', (event) => {
-//     const path = new URL(event.request.url).pathname
-
-//     if (event.request.headers.get('accept').includes('text/html')) {
-//         event.respondWith(
-//             caches.open(RUNTIME_CACHE_NAME)
-//                 .then(cache => cache.match(event.request))
-//                 .then(response => response || fetchAndCache(event.request))
-//                 .catch(() => caches.open(CORE_CACHE_NAME)
-//                     .then(cache => cache.match('/offline')))
-//         )
-//     } else if (CORE_ASSETS.includes(path)) {
-//         event.respondWith(
-//             caches.open(CORE_CACHE_NAME)
-//                 .then(cache => cache.match(path))
-//         )
-//     }
-// })
-
-// function fetchAdnCache(request) {
-//     return fetch(request)
-//         .then(response => {
-//             const clone = response.clone()
-//             caches.open(RUNTIME_CACHE_NAME)
-//                 .then(cache => cache.put(request, clone))
-
-//             return response
-//         })
-// }
