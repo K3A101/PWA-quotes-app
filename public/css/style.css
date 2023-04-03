@@ -359,7 +359,7 @@ main #home article {
 /* De selector selecteert alleem de biografie van de persoon */
 #content section:nth-of-type(2) p {
     font-family: var(--paragraaf);
-    font-size: clamp(.5em, 3vw, 1em);
+    font-size: clamp(.8em, 3vw, 1em);
     font-weight: 300;
     padding-right: 1.5em;
 }
@@ -374,10 +374,10 @@ main #home article {
 }
 
 #content ul  a{
-bottom: 1em;
+bottom: .5em;
 font-family: var(--algemene-text);
 position: absolute;
-right: 2em;
+left: 16em;
 background-color: var(--donker-blauw);
 color: var(--grijs);
 padding: .5em;
@@ -448,46 +448,7 @@ background-color: var(--donker-blauw);
     gap: 1em;
 }
 
-/*****************/
-/* LOADING STATE */
-/*****************/
-/* .loading.loading-avatar {
-    width: 3em;
-    height: 3em;
-    aspect-ratio: 1;
-    content: none;
-    background-color: var(--donker-groen);
-}
 
-
-.loading.loading-content {
-    width: 80vw;
-    height: 60vh;
-    aspect-ratio: 1;
-    border-radius: 3em;
-    padding: 1em;
-    background-color: var(--donker-groen);
-    display: none;
-    justify-content: center;
-}
-
-.loading-app-name {
-    background-color: var(--donker-groen);
-    color: var(--donker-groen);
-    width: 4em;
-    border-radius: .2em;
-}
-
-.loading-username {
-    background-color: var(--donker-groen);
-    color: var(--donker-groen);
-    padding: .5em;
-    border-radius: .5em;
-}
-
-.loading.display {
-    display: block;
-} */
 
 /***************/
 /* ERROR-STATE */
