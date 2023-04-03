@@ -8,7 +8,8 @@
     "example": "examples"
   },
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
+    "dev":"nodemon app.js",
     "minify:server": "uglifyjs app.js -c -m -o app.min.js",
     "minify:routerFolder": "uglifyjs-folder ./routes -eo ./routes-output",
     "minify:routerOne": "uglifyjs-folder ./routes -o ./routes-output/routes.min.js",
