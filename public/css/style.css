@@ -377,7 +377,7 @@ main #home article {
 bottom: .5em;
 font-family: var(--algemene-text);
 position: absolute;
-left: 16em;
+left: 9em;
 background-color: var(--donker-blauw);
 color: var(--grijs);
 padding: .5em;
@@ -631,6 +631,10 @@ body>figure img {
         place-self: center;
         width: 100vmin;
     }
+
+        #content ul a{
+            left: 16em;
+        }
 
 }
 
