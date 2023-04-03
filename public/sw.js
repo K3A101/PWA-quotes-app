@@ -1,5 +1,5 @@
-const CORE_CACHE_NAME = 'cache-v1';
-const DYNAMIC_CACHE_NAME ='dynamic-cache-v1';
+const CORE_CACHE_NAME = 'cache-v2';
+const DYNAMIC_CACHE_NAME ='dynamic-cache-v2';
 const CORE_ASSETS = [
     '/',
     '/offline',
