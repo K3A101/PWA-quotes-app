@@ -11,28 +11,28 @@ Design quotes is een applicatie voor studenten die opzoek zijn naar inspirerende
 ---
 
 # Inhoud
-- [Applicatie installeren]()
-- [NPM package installeren]()
-- [Node en NPM installeren]()
-- [Applicatie gebruiken]()
-- [Express Server maken]()
-- [Routing]()
-- [Template Engine]()
-- [URL endpoints]()
-  - [Homepagina]()
-  - [Overzichtpagina]()
-  - [Detailpagina]()
-  - [Aboutpagina]()
-  - [Build Tools]()
-- [Maak de webapplicatie een progressive web App]()
-- [Hoe maak ik de App installeerbaar]()
-- [Manifest.json]()
-- [Service worker]()
-- [How werkt de service worker]()
-- [Activity Diagram van Service worker]()
-- [Critical Rendering Path]()
-- [Web App structuur]()
-- [Build Tools]()
+- [Applicatie installeren](https://github.com/K3A101/PWA-quotes-app#applicatie-installeren)
+- [Node en NPM installeren](https://github.com/K3A101/PWA-quotes-app#npm-en-nodejs-installeren)
+- [NPM package installeren](https://github.com/K3A101/PWA-quotes-app#npm-package-installeren)
+- [Applicatie gebruiken](https://github.com/K3A101/PWA-quotes-app#applicatie-gebruiken)
+- [Express Server maken](https://github.com/K3A101/PWA-quotes-app#express-server-maken)
+- [Routing](https://github.com/K3A101/PWA-quotes-app#basic-routing)
+- [Template Engine](https://github.com/K3A101/PWA-quotes-app#template-engine)
+- [Routes Bestand](https://github.com/K3A101/PWA-quotes-app#routes-bestand)
+  - [Homepagina](https://github.com/K3A101/PWA-quotes-app#homepagina)
+  - [Overzichtpagina](https://github.com/K3A101/PWA-quotes-app#overzichtpagina)
+  - [Detailpagina](https://github.com/K3A101/PWA-quotes-app#versie-2-detailpagina)
+  - [Aboutpagina](https://github.com/K3A101/PWA-quotes-app#aboutpagina)
+  - [Build Tools](https://github.com/K3A101/PWA-quotes-app#build-tools)
+- [Maak de webapplicatie een progressive web App](https://github.com/K3A101/PWA-quotes-app#maak-de-applicatie-een-progressive-web-app)
+- [Hoe maak ik de App installeerbaar](https://github.com/K3A101/PWA-quotes-app#hoe-maak-ik-de-app-een-pwa-installeerbaar)
+- [Manifest.json](https://github.com/K3A101/PWA-quotes-app#manifestjson)
+- [Service worker](https://github.com/K3A101/PWA-quotes-app#service-worker)
+- [How werkt de service worker](https://github.com/K3A101/PWA-quotes-app#hoe-werkt-de-service-worker)
+- [Activity Diagram van Service worker](https://github.com/K3A101/PWA-quotes-app#activity-diagram-van-de-service-worker)
+- [Critical Rendering Path](https://github.com/K3A101/PWA-quotes-app#critical-rendering-path)
+- [Hoe heb ik de critical rendering path beter gemaakt?](https://github.com/K3A101/PWA-quotes-app#hoe-heb-ik-de-critical-rendering-path-beter-gemaakt)
+- [Applicatie online zetten](https://github.com/K3A101/PWA-quotes-app#applicatie-online-zetten)
 ---
 
 ## Applicatie installeren
@@ -147,7 +147,7 @@ Om de server te starten en live demo te bekijken moet je een van deze commando's
 
 ---
 
-## Server maken
+## Express Server maken
 ### Express installeren
 Voor de App heb ik een server gemaakt met de Express.js library. Express is een backend web applicatie framework van Node.js. Hiermee kan je een server side applicatie maken met alleen javascript. Om Express te gebruik heb ik eerst geïnstalleerd met npm. Hetzelfde commando heb ik gebruikt.
 
@@ -166,7 +166,7 @@ const app = express();
 const port = 5000;
 ```
 
-### Basic routing
+## Basic routing
 Verder heb ik een routing toegevoegd voor alle pagina's van de app. De pagina wordt weergegeven met de bijbehorende URL endpoints. Het is een request om de url op te halen vanuit de server. Wanneer de server de URL vind, wordt de pagina gestuurd naar de client met een templating engine. Hier is de structuur van een server-side routing.
 
     app.METHOD(PATH, HANDLER)
@@ -176,7 +176,7 @@ Verder heb ik een routing toegevoegd voor alle pagina's van de app. De pagina wo
 3. Path is een pad van de server
 4. Handler is een functie die uitgevoerd wordt als de route overeenkomen
 
-#### Routing in design quotes app
+### Routing in design quotes app
 
 ```javascript
 // app.js
@@ -210,7 +210,7 @@ app.listen(port, () => {
 #### Nodemon
 Om het makkelijk te maken voor mezelf heb ik een package geïnstalleerd waar ik de server kan verversen. Daarmee hoeft ik niet elke keer de server starten met `node app.js`
 
-#### Npm scripts
+### Npm scripts
 In mijn package.json bestand is er een onderdeel met scripts. NPM scripts zijn zelf gemaakte npm commando's die je aan de terminal kan geven om bepaalde taken uit te kunnen voeren.
 Ik heb eem npm script gemaakt waar ik de server kan starten. Ik heb een script die het server start. In de terminal voer je deze commando in: `npm start` of `npm run start`. Om de server te starten met Nodemon gebruik je deze script: `npm run dev`.
 
@@ -971,11 +971,35 @@ De laatste onderdeel voor dit opdracht is de app online zetten. Hiervoor heb ik 
 
 ---
 ## Bronnen
-- https://sass-lang.com/guide
-- https://www.youtube.com/watch?v=4XT23X0Fjfk&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&ab_channel=TheNetNinja
-- https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
-- https://web.dev/why-speed-matters/
-- https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
-- https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path
-- https://github.com/mishoo/UglifyJS#readme
-- https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json
+- Sass: Sass Basics. (z.d.). https://sass-lang.com/guide
+- The Net Ninja. (2019b, mei 6). PWA Tutorial for Beginners #1 - What Are PWA’s? [Video]. YouTube. https://www.youtube.com/watch?v=4XT23X0Fjfk
+- Service Worker API - Web APIs | MDN. (2023, 13 maart). [Video]. https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
+- Why does speed matter? (2019, 1 mei). [Video]. web.dev. https://web.dev/why-speed-matters/
+- font-display - CSS: Cascading Style Sheets | MDN. (2023, 21 februari). [Video]. https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
+- Critical rendering path - Web performance | MDN. (2023, 24 februari). . https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path
+- M. (z.d.). GitHub - mishoo/UglifyJS: JavaScript parser / mangler / compressor / beautifier toolkit  GitHub. https://github.com/mishoo/UglifyJS#readme
+- manifest.json - Mozilla | MDN. (2023, 7 maart). . https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json
+- Getting Started Guide | Node.js. (z.d.).  Node.js. https://nodejs.org/en/docs/guides/getting-started-guide/
+- Installing Express. (z.d.-b). http://expressjs.com/en/starter/installing.html
+- Progressive Web Apps The future of Mobile Web - Awwwards. (z.d.). https://www.awwwards.com/PWA-ebook/en
+- Judis, S. (2021, 17 januari). The state of PWAs (progressive web apps) in 2020/2021. Stefan Judis Web Development. https://www.stefanjudis.com/notes/the-state-of-pwa-adoption-in-2020-2021/
+- Service worker overview - Chrome Developers. (2021, 24 september). Chrome Developers. https://developers.google.com/web/fundamentals/primers/service-workers
+- web.dev. (z.d.). Progressive web Apps. https://web.dev/progressive-web-apps/
+- The Offline Cookbook. (2014, 9 december). web.dev. https://web.dev/offline-cookbook/
+- Why does speed matter? (2019b, mei 1). web.dev. https://web.dev/why-speed-matters/
+- Lighthouse overview - Chrome Developers. (2016, 27 september). Chrome Developers. https://developer.chrome.com/docs/lighthouse/overview/
+- Veerapathirathasan, V. (2023, 15 maart). How to install Node.js and npm using Node Version Manager (NVM). Medium. https://medium.com/@iam_vinojan/how-to-install-node-js-and-npm-using-node-version-manager-nvm-143165b16ce1
+- EJS -- Embedded JavaScript templates. (z.d.). https://ejs.co/
+- Kandut, M. (2022, 6 januari). What are NPM scripts? - Mario Kandut - Medium. Medium. https://medium.com/@mariokandut/what-are-npm-scripts-cde15d275a9f
+- npm: uglify-js. (z.d.). npm. https://www.npmjs.com/package/uglify-js
+- freeCodeCamp.org. (2021, 28 april). CSS Preprocessors Explained. https://www.freecodecamp.org/news/css-preprocessors/
+- WebStylePress. (2022, 3 juni). MINIFY JAVASCRIPT FILES & FOLDERS in Multiple Ways (Command Line & Code Editor) [Video]. YouTube. https://www.youtube.com/watch?v=umVoV4ak0HA
+- Add a web app manifest. (2018, 5 november). web.dev. https://web.dev/add-manifest/?utm_source=devtools
+- manifest.json - Mozilla | MDN. (2023b, maart 7). https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json
+- npm: express-minify-html. (z.d.). npm. https://www.npmjs.com/package/express-minify-html
+- Coyier, C. (2022, 30 september). How to use @font-face in CSS | CSS-Tricks. CSS-Tricks. https://css-tricks.com/snippets/css/using-font-face-in-css/
+- font-display - CSS: Cascading Style Sheets | MDN. (2023b, februari 21). https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
+- CSS performance optimization - Learn web development | MDN. (2023, 4 maart). https://developer.mozilla.org/en-US/docs/Learn/Performance/CSS
+- CSS performance optimization - Learn web development | MDN. (2023b, maart 4). https://developer.mozilla.org/en-US/docs/Learn/Performance/CSS
+- The performance effects of too much lazy loading. (2021, 15 juli). web.dev. https://web.dev/lcp-lazy-loading/
+- 
