@@ -2,10 +2,26 @@
 Voor het vak progressive web app, ga ik  mijn  Stess relief qoutes app refatoren naar een server side applicatie. 
 
 # Inhoud
+- [Applicatie installeren]()
+- [NPM package installeren]()
 - [Node en NPM installeren]()
-- [Express Server]()
+- [Applicatie gebruiken]()
+- [Express Server maken]()
 - [Routing]()
 - [Template Engine]()
+- [URL endpoints]()
+  - [Homepagina]()
+  - [Overzichtpagina]()
+  - [Detailpagina]()
+  - [Aboutpagina]()
+  - [Build Tools]()
+- [Maak de webapplicatie een progressive web App]()
+- [Hoe maak ik de App installeerbaar]()
+- [Manifest.json]()
+- [Service worker]()
+- [How werkt de service worker]()
+- [Activity Diagram van Service worker]()
+- [Critical Rendering Path]()
 - [Web App structuur]()
 - [Build Tools]()
 ---
@@ -52,7 +68,12 @@ Om een package.json te installeren gebruik je de commando `npm init`. Als output
     "example": "examples"
   },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "minify:server": "uglifyjs app.js -c -m -o app.min.js",
+    "minify:routerFolder": "uglifyjs-folder ./routes -eo ./routes-output",
+    "minify:routerOne": "uglifyjs-folder ./routes -o ./routes-output/routes.min.js",
+    "minify:js": "uglifyjs-folder ./public/script -eo ./public/script-output/clientside.min.js"
   },
   "repository": {
     "type": "git",
@@ -68,10 +89,17 @@ Om een package.json te installeren gebruik je de commando `npm init`. Als output
   },
   "homepage": "https://github.com/K3A101/PWA-quotes-app#readme",
   "dependencies": {
-    "body-parser": "^1.20.2",
+    "axios": "^1.3.4",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "nodemon": "^2.0.21"
+    "express-minify-html": "^0.12.0",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21",
+    "sass": "^1.59.3",
+    "uglify-js": "^3.17.4",
+    "uglifyjs-folder": "^3.2.0"
   }
 }
 
@@ -764,7 +792,9 @@ self.addEventListener('activate', (event) => {
 ```
 Als de oude caches niet matchen dan wordt de oude versie verwijdert.
 ## Activity Flow van de Service worker
+![Activity Diagram](public/images/activity-diagram-service-worker.png)
 
+Dit is mijn activity diagram voor de service worker. Het diagram bestaat uit, een wireflow van de applicatie. De url endpoints van de applicaties. Onderaan heb je de control flow dus de belangrijkste onderdeel van de activity diagram. 
 
 ---
 # Critical rendering path
@@ -869,10 +899,12 @@ De code die ik hiervoor had gebruikt:
 let options = { maxAge: '2y' }
 app.use(express.static('public', options))
 ```
-
-
 ---
+## Applicatie online zetten
+De laatste onderdeel voor dit opdracht is de app online zetten. Hiervoor heb ik een online webserver gebruikt  die mijn webapp kan hosten. Ik heb `railway.app` gebruikt. Met railway kan ik mijn github account koppelen en elke keer dat ik commit wordt het ook op railway aangepast. 
 
+![Railway](public/images/railway.png)
+---
 ## Bronnen
 - https://sass-lang.com/guide
 - https://www.youtube.com/watch?v=4XT23X0Fjfk&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&ab_channel=TheNetNinja
