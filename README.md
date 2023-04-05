@@ -1,5 +1,14 @@
 # Stress relief- quotes - Progressive Web Apps 
-Voor het vak progressive web app, ga ik  mijn  Stess relief qoutes app refatoren naar een server side applicatie. 
+Design quotes is een applicatie voor studenten die opzoek zijn naar inspirerende design citaten om in hun werk te gebruiken. De applicatie heeft een lijst met citaten van verschillende beroemde developers en ontwerpers. Elke citaat bestaat uit de auteur van de citaat, een biografie van de auteur, een foto van de auteur zelf. Dit concept was bedacht het vak Web App From Scratch. Het is client-side applicatie gemaakt met HTML, javascript en CSS. Voor dit vak heb ik de app omgezet in een installeerbare web App. Het is volledige gemaakt met server-side javascript, Express.js, EJS template engine en service Worker. 
+
+![Homepagina](/public/images/homepagina.png)
+![Overzichtpagina](/public/images/overzichtpagina.png)
+![Detailpagina](/public/images/detailpagina.png)
+
+### Link naar de DEMO
+[Design Quote App](https://pwa-quotes-app-production.up.railway.app/)
+
+---
 
 # Inhoud
 - [Applicatie installeren]()
@@ -40,7 +49,7 @@ Om de server te installeren heb ik node en express gebruikt. Dat doe ik met `nvm
 ```
 nvm install 19.8.1
 ```
-Als je deze commando in je terminal intoets dan installeer je de laatse versie van npm en node.js. Je moet ervoor zorgen dat je ze allemaal installeer in je root van je app folder.
+Als je deze commando in je terminal intoets dan installeer je de laatste versie van npm en node.js. Je moet ervoor zorgen dat je ze allemaal installeer in je root van je app betandmap.
 
 #### 2. Versie bekijken
 Om  te kijken of je de juiste versie hebt moet je achter de pakketnaam een -v toevoegen. 
@@ -57,7 +66,7 @@ node -v
 #### Package.json opzetten
 Om een package.json te installeren gebruik je de commando `npm init`. Als output krijg je aantal vragen die je moet invullen. Zoals de naam van de applicatie, maker van de applicatie, applicatie versie, licentie, repo, geïnstalleerde npm packages etc. Hieronder ziet u een voorbeeld van wat er staat in mijn package.json bestand.
 
-```
+```json
 {
   "name": "pwa-quotes-app",
   "version": "1.0.0",
@@ -106,38 +115,46 @@ Om een package.json te installeren gebruik je de commando `npm init`. Als output
 ```
 
 ### Benodige packages installeren
-Als je een functionaliteit wilt toevoegen, heb ik npm registery gebruikt, daar vind je verschillende packages die je in je app kan gebruiken. 
 Tot nu toe heb ik express, nodemon, ejs en body-parser geïnstalleerd.
-Om paketten te installeren gebruik je de volgende commando.
+Als je een functionaliteit wilt toevoegen, heb ik npm registery gebruikt, daar vind je verschillende packages die je in je app kan gebruiken. Ik heb verschillende packages geïnstalleerd. Om ze te kunnen bekijken, kun je in mijn package.json gaan spieken. 
+Om paketten te installeren gebruik je de volgende commando:
 
     npm install express
     <!-- npm install <package-name> -->
 
-### Applictie gebruiken
+## Applicatie gebruiken
+Hier is een korte stappenplan hoe je mijn project kan gebruiken in je eigen Dev Environment.
 
-#### Repository Clonen
+### Repository Clonen
+Het eerste wat je moet doen is deze repository forken. Dan kun je deze bestandstructuur gebruiken.
+    
     git clone https://github.com/K3A101/PWA-quotes-app.git
 
 
-#### Npm install
+### Npm install
 
-Als de applicatie eenmaal klaar is en je wilt hem gebruiken dan moet je alleen `npm install` gebruiken. Alle packages binnen  mijn  app wordt automatisch geïnstalleerd.
+Als de applicatie eenmaal klaar is en je wilt hem gebruiken dan moet je alleen `npm install` gebruiken. Alle packages binnen  mijn  app en `package.json` worden automatisch geïnstalleerd.
 
 
-#### Server starten
-Om de server te starten moet je deze commando onderaan uitvoeren:
+### Server starten
+Om de server te starten en live demo te bekijken moet je een van deze commando's onderaan uitvoeren:
 
-    npm start
+    npm run dev
+    <!-- nodemon app.js -->
+          of
+    npm run start
+    <!-- node app.js -->
 
 ---
 
 ## Server maken
 ### Express installeren
-Om een server te maken voor mijn applicatie, heb ik de library express gebruikt. Ik heb express geinstalleerd met npm. 
+Voor de App heb ik een server gemaakt met de Express.js library. Express is een backend web applicatie framework van Node.js. Hiermee kan je een server side applicatie maken met alleen javascript. Om Express te gebruik heb ik eerst geïnstalleerd met npm. Hetzelfde commando heb ik gebruikt.
+
 
     npm install express
 
-Verder heb ik een `app.js `bestand gemaakt. In de app.js bestand ga ik mijn server bouwen. 
+Verder heb ik een `app.js `bestand gemaakt. In de app.js bestand had ik mijn express server ingericht. 
 
 ### Express importeren
 Ten eerste heb ik express geïmporteerd met de `require()` methode. 
@@ -150,14 +167,14 @@ const port = 5000;
 ```
 
 ### Basic routing
-Verder heb ik een routing toegevoegd voor alle pagina's applicatie. Dus de pagina wordt gerendered als de url past. Het is een request om de url op te halen van de server. Verder word pagina gerendered met een templating engine. Hier is de structuur van een server-side routing.
+Verder heb ik een routing toegevoegd voor alle pagina's van de app. De pagina wordt weergegeven met de bijbehorende URL endpoints. Het is een request om de url op te halen vanuit de server. Wanneer de server de URL vind, wordt de pagina gestuurd naar de client met een templating engine. Hier is de structuur van een server-side routing.
 
     app.METHOD(PATH, HANDLER)
 
-1. app is een isntallatie van express
-1. Method is een HTTP request method ( POST, GET, PUT, DELETE)
-1. Path is een pad van de server
-1. Handler is een functie die uitgevoerd wordt als de route overeenkomen
+1. app is een instantie van express
+2. Method is een HTTP request methode ( POST, GET, PUT, DELETE)
+3. Path is een pad van de server
+4. Handler is een functie die uitgevoerd wordt als de route overeenkomen
 
 #### Routing in design quotes app
 
@@ -177,10 +194,10 @@ app.get('/about', (req, res) => {
 
 
 ```
-Wanneer de ik de request krijgt dan wordt de about of home pagian gerendered. Om de HTMl te renderen heb ik gebruikt gemaakt van ejs template engine. Ik komst straks weer op terug. 
+Deze stukje bovenop is een get request van de Homepagina en de Aboutpagina. Om bijvoorbeeld de aboutpagina te bereiken moet je aan het eind van het domein `/about`zetten. Daarna wordt de pagina weergegeven met `res.render()`. De waarde is de EJS bestand. Dat de template engine die ik heb gebruikt. 
 
 
-### Server starten op local host
+### Server starten op localhost
 Om de server te starten heb ik de `app.listen()`methode gebruikt. Ik heb eerst een variabele `const port: 5000;` gemaakt.  En als argument in de functie gezet. Dus als ik de server wil starten gebruik ik deze link: [ http://localhost:5000](http://localhost:5000).
 
 ```javascript
@@ -191,50 +208,73 @@ app.listen(port, () => {
 ```
 
 #### Nodemon
-Om het makkelijk te maken voor mezelf heb ik package geinstalleerd dat ik de server kan refeshen. Daarmee hoeft ik niet elke keer de server starten met `node app.js`
+Om het makkelijk te maken voor mezelf heb ik een package geïnstalleerd waar ik de server kan verversen. Daarmee hoeft ik niet elke keer de server starten met `node app.js`
 
 #### Npm scripts
-Ik heb eem npm script gemaakt waar ik de server kan starten. Het is een soort van zelf gemaakte npm commando die je aan de terminal kan geven om bepaalde taken uit te voeren. Ik heb een script warmee ik de server kan starten. In de terminal voer je deze commando in: `npm start` of `npm run start`
+In mijn package.json bestand is er een onderdeel met scripts. NPM scripts zijn zelf gemaakte npm commando's die je aan de terminal kan geven om bepaalde taken uit te kunnen voeren.
+Ik heb eem npm script gemaakt waar ik de server kan starten. Ik heb een script die het server start. In de terminal voer je deze commando in: `npm start` of `npm run start`. Om de server te starten met Nodemon gebruik je deze script: `npm run dev`.
 
 ```json
 // package.json
  "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev":"nodemon app.js"
   },
 ```
 
-### Package in server importeren
-Als je npm package importeert dan moet je de `app.use()` methode gebruiken.  Hier heb ik de body-parser geinstalleerd. 
+### Package in het server importeren
+Als je een npm package importeert dan moet je de `app.use()` methode gebruiken. Hier is een voorbeeld dat laat zien hoe dat allemaal gebeurd.  Hier heb ik `express-minify-html` geïnstalleerd. Eerst de minifyHRML importeren met `require()` en deze in variabele opslaan. Verder `app.use()`gebruiken om de package in het server te gebruiken.
+
 ```javascript
- app.use(bodyParser.urlencoded({ extended: false }));
- app.use(bodyParser.json());
+const minifyHTML = require('express-minify-html');
+ app.use(minifyHTML({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes: true,
+        removeEmptyAttributes: true,
+        minifyJS: true
+    }
+}));
+```
+Je kan met de `put()` methode je eigen componenten in de server importeren. Ik heb een aparte bestand gemaakt voor mijn routes en daarna het betsand importeren met de path naar het bestand.
+
+```javascript
+// Installeer de route betsand in de server
+var quotesRouter = require('./routes/quotes');
+//An express zeggen om quotes.js bestand te gebruiken voor quotes router
+app.use('/', quotesRouter);
+
 ```
 
 ---
 ## Template engine
-Een templating engine zorgt ervoor dat je statische paginas kun renderen via de server side javascript. Dus je kan bijvoorbeeld je html, css en afbeelding via de server implementeren. Er zijn verschillende soorten template engine. Ik heb ejs gebruikt. 
+Een templating engine zorgt ervoor dat je statische pagina's kun weergeven via de server. Dus je kan bijvoorbeeld je html, css en afbeelding naar de server sturen en dan weer opvragen. Je kan uit verschillende engine kiezen en gebruiken. Ik heb EJS template engine gebruikt. 
 
 
-### Ejs installeren
+### EJS installeren
 Het eerste wat je moet doen is ejs installeren met npm
    
     npm install ejs
 
 ### Templating ejs in de server toevoegen
-In de server moet je aangeven welke templating ejs je gaat gebruiken. Je gebruikt de `app.set()` methode.
+In de server moet je aangeven welke templating engine je gaat gebruiken. Je gebruikt de `app.set()` methode.
 
     app.set('view engine', 'ejs');
 
 
 ### Views bestandmap maken
-Daarna maak je een views bestandmap. Hierin komt al je ejs paginas van je applicaties. 
+Daarna maak je een views bestandmap. Hierin komt al je ejs pagina's van je applicaties. 
 
 
-### Statisch bestand
-Statisch bestanden zijn je css stylesheets, client-side javascript en je afbeeldingen. Om deze bestanden via de server te halen. Moet je de `static` express middleware gebruiken. Ik heb in mijn applicatie bestande een `public/` bestandmap gemaakt. Daarin heb ik mijn css stylesheets en mijn afbeeldingen.
+### Statisch bestanden
+Statisch bestanden zijn je css stylesheets, client-side javascript en je afbeeldingen. Om deze bestanden via de server op te halen. Moet je de `static` express middleware gebruiken. Ik heb in mijn applicatie een `public/` bestandmap gemaakt. Daarin heb ik mijn css stylesheets, manifest.json, service worker en mijn afbeeldingen.
 
 #### Public bestandmap toveoegen in de server
-Om mijn pagina te stijlen me de css heb ik de public bestandmap toegevoegd met de static express middleware. 
+Om mijn pagina te stijlen me de css heb ik de public bestandmap toegevoegd met de static express middleware. Hieronder kun je zien hoe het werkt.
 
 ```javascript
 //Gebruikt de public folder
@@ -244,14 +284,16 @@ app.use(express.static('public'))
 ### Volledige code in app.js bestand
 
 ```javascript
-// Geinstalleerde packages
-const bodyParser = require('body-parser');
+// Express importeren
 const express = require('express');
 
-
+//Nieuwe server aanmaken
 const app = express();
 const port = 5000;
 const path = require("path");
+let options = { maxAge: '2y' }
+const minifyHTML = require('express-minify-html');
+
 // Setup de template engine ejs
 app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
@@ -259,38 +301,39 @@ app.set('view engine', 'ejs');
 
 
 //Gebruikt de public folder
-app.use(express.static('public'))
-
-
-// Configuring body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.static('public', options))
 
 
 
-// Home pagina
-app.get('/', (req, res) => {
-    res.render("index")
-    // res.send('Hello World!!!')
-})
+// Installeer de route betsand in de server
+var quotesRouter = require('./routes/quotes');
+//An express zeggen om quotes.js bestand te gebruiken voor quotes router
+app.use('/', quotesRouter);
 
-// About pagina
-app.get('/about', (req, res) => {
-    res.render("about")
-    // res.send('Hello World!!!')
-})
+app.use(minifyHTML({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes: true,
+        removeEmptyAttributes: true,
+        minifyJS: true
+    }
+}));
 
-
+// Server gehost op port 5000
 app.listen(port, () => {
     console.log(`Example app listening on  http://localhost:${port}`)
 })
 ```
 ---
 ## Routes bestand
-Ik heb mijn routes in een aparte bestand gemaakt. Ik heb de App een een beetje aangepast. Mijn applicatie bestaat uit:
+Ik heb mijn routes/URL endpoints request functies in een aparte bestand gemaakt. Ik heb mijn app.js bestand een een beetje aangepast. Mijn applicatie bestaat uit:
 - Homepagina met een link naar de homepagina
 - Overzichtpagina met alle quotes
-- Detailpagina per quotes
+- Detailpagina  per quotes
 - Aboutpagina
 
 Alle pagina hebben een eigen routes url. De routes is te vinden in de bestandmap `routes/quotes.js`. 
@@ -298,7 +341,7 @@ Alle pagina hebben een eigen routes url. De routes is te vinden in de bestandmap
 
 ### In de quotes bestand
 
-In quotes.js staat al de routes url voor mijn applicatie. Ik heb ten eerste een express router instantie gemaakt en de URL daaraan gekoppeld. Ik heb verder de requets package die ik heb gedownload met npm in deze bestand geïmporteerd. Hiermee kan ik wat doen met de API url.
+In quotes.js staat al de routes url voor mijn applicatie. Ik heb ten eerste een express router instantie gemaakt en de URL daaraan gekoppeld. Ik heb verder de request package die ik heb gedownload met npm in deze bestand geïmporteerd. Hiermee kan ik wat doen met de API url. Het lijkt als de fetch() functie van client-side javascript.
 ```javascript
 const express = require('express');
 const request = require('request');
@@ -310,18 +353,20 @@ Verder heb ik per pagina een url gegeven met de `router.get()` methode.
 
 ### Homepagina
 In mijn homepagina is de route een `/` slash dus de root. Dus ik ga een request doen naar de data van de API en wordt gerendered op de index.ejs template pagina.
+![Homepagina](public/images/homepagina.png)
 
 ```javascript
-// /routes/quote,js
-router.get('/', (req,res)=>{
-    request('https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1', { json: true }, (err, requestRes, body) => {
+// /routes/quotes.js
+// Homepagina
+ const API_URL = `https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1/`
+
+router.get('/', (req, res) => {
+    request(API_URL, { json: true }, (err, requestRes, body) => {
         if (err) {
             // We got an error
             res.send(err);
         } else {
-
-
-            res.render('index',{
+            res.render('index', {
                 title: 'Home',
                 pageTitle: 'Design quotes'
 
@@ -329,6 +374,7 @@ router.get('/', (req,res)=>{
         }
     })
 })
+
 ```
 
 ```html
@@ -342,19 +388,24 @@ router.get('/', (req,res)=>{
             </article>
         </section>
 ```
+![Homepagina](public/images/homepagina.png)
+
 ### Overzichtpagina
-In de overzichtpagina is de route een `/quotes`. Deze pagina heeft een lijst van alle quotes die te vinden zijn in de API. Alle data wordt gerendered in de `quotes.ejs` bestand. Ik heb het een forEach loo gebruikt om alle die data te renderen. 
+In de overzichtpagina is de route een `/quotes`. Deze pagina heeft een lijst van alle quotes die te vinden zijn in de API. Alle data wordt gerendered in de `quotes.ejs` bestand. Ik heb het een forEach loop gebruikt om alle die data te weergeven. 
 ![Overzichtpagina](./public/images/overzichtpagina.png)
 
 ```javascript
 // /routes/quotes.js
-router.get('/quotes', (req, res) =>{
-    request('https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1', {json:true}, (err, requestRes, body) =>{
+// Overzichtpagina
+ const API_URL = `https://opensheet.elk.sh/14joQ9h8M0ydoJJ-fNYN68ls3TWPCvk8ZvBJvUXpF1cQ/sheet1/`
+
+router.get('/quotes', (req, res) => {
+    request(API_URL, { json: true }, (err, requestRes, body) => {
         if (err) {
             // We got an error
             res.send(err);
         } else {
-           
+
             // Render the page using the 'quotes' view and our body data
             res.render('quotes', {
                 title: 'Quotes', // We use this for the page title, see views/partials/head.ejs
@@ -392,8 +443,8 @@ router.get('/quotes', (req, res) =>{
 
 ```
 
-### Detailpagina NOG NIET KLAAR!!
-In de detailpagina h is de route een `/qoutes/:id`. Dit betekent de ID per quotes staat in de url. Dus als je  de link klikt via een van de quotes in de overzichtpaginas. Dan ga je naar de detailpagina van die ene quote. 
+### Detailpagina versie 1
+In de detailpagina  is de route een `/qoutes/:id`. Dit betekent de ID per quotes staat in de url. Dus als je  de link klikt via een van de quotes in de overzichtpaginas. Dan ga je naar de detailpagina van die ene quote. 
 
 ```javascript
 router.get('/quotes/:id', function (req, res) {
@@ -417,11 +468,11 @@ router.get('/quotes/:id', function (req, res) {
 Ik heb een iteratie gemaakt aan mijn detailpagina. Met de package `request` was het niet mogelijk om een detailpagina te maken op basis van de Id. Want het was een beperking met mij API. Ik heb daardoor een andere pakket gebruikt. Die heet __axios__. Axios lijkt bijna hetzelfde als de fetch API in het client-side. 
 ![Detailpagina](./public/images/detailpagina.png)
 
-Ten eerste heb ik de package geinstalleerd met:
+Ten eerste heb ik de package geïnstalleerd met:
 
     npm install axios
 
-Het is bijna hetzelfd als de vorige maar hoer heb ik de `request()` verandert met `axios.get()`. Daarin zet ik mijn Url. Verder doe ik een response naar de APi. Ik ga ook opzoek naar id. Als de overeen 
+Het is bijna hetzelfd als de vorige maar hier heb ik de `request()` verandert met `axios.get()`. Daarin zet ik mijn API URL. Verder doe ik een response naar de API. Ik ga ook opzoek naar de id. Als ze overeenkomen, wordt de quote.ejs template engine naar de gebruiker gestuurd.
 
 ```javascript
 router.get('/quotes/:id', function (req, res) {
@@ -485,7 +536,7 @@ router.get('/about', (req, res) => {
 
 ```
 ### Routes in de server toevoegen
-Wanneer ik klaar was met de routes, heb ik geexporteerd op deze manier: `module.exports = router;`
+Wanneer ik klaar was met de routes, heb ik het geëxporteerd op deze manier: `module.exports = router;`
 En in mijn app.js heb ik een variabele `quotesRoter` gemaakt waarvan ik de router  inporteerde. Om de compontent te gebruiken heb ik de `app.use()` gebruikt. 
 
 ```javascript
@@ -502,21 +553,21 @@ Build tools automatiseert herhalende taken en optimaliseert de workflow wanneer 
 - om  Afbeeldingen via een bron te laden
 - Om HTML bestanden prerenderen
 
-Tijdens mijn onderzoek ben tegen verschilldende tools gekomen zoals webpack, grunt, browserfy, parcel, minifyjs, uglifyjs enz. Voor CSS had ik  verschillende preprocessors gevonden zoals SASS,LESS en Stylus. Uiteindelij heb ik uglifyjs en SASS gekozen om verder mee te werken. Ik heb OA  de tooling gekoppeld aan een NPM script. Ik Nu Stap voor stap uitleggen hoe ik had alles gedaan.
+Tijdens mijn onderzoek ben ik tegen verschilldende build tools gekomen zoals webpack, grunt, browserfy, parcel, minifyjs, uglifyjs enz. Voor CSS had ik  verschillende preprocessors gevonden zoals SASS,LESS en Stylus. Uiteindelijk heb ik uglifyjs en SASS gekozen om verder mee te werken. Ik heb daarna  de build tool gekoppeld aan een NPM script. Ik ga nu stap voor stap uitleggen hoe ik had alles gedaan.
 
 ## Uglify.js
-uglifyjs is een npm package waar je bestanden kan comprimeren, verkleiner en een verfraaiing. Hier is een link naar de [documentatie](https://github.com/mishoo/UglifyJS).
+uglifyjs is een npm package waar je bestanden kan comprimeren, verkleinen en een verfraaien. Hier is een link naar de [documentatie](https://github.com/mishoo/UglifyJS) van uglifyjs.
 
 ### Installeren
 Je installeert uglifyjs met `npm install` commando:
 ```
  npm install uglify.js
 ```  
- Ik heb die van mij in de devDependencies geplaats met 
+ Ik heb die van mij in de devDependencies geplaatst met 
 ```
  npm install uglify.js --save-dev  
 ```
-### Hoe je moet het gebruiken?
+### Hoe gebruik je UglifyJs?
 Om uglify te gebruiken, moet je de volgende commando in de terminal plaatsen.
 ```
 uglifys [input bestand] [options]
@@ -526,10 +577,10 @@ Ten eerste zet je uglify naar voren en daarna bij `[input bestand]`zet je de bes
 - -m --mangle
 - -o --output <file>; Het geminimaliseerde uitgevoerde bestand. 
 
-Er zijn verschillende soorten taken die je kan toevoegen. Om ze te bekijken moet je `uglifyjs -help` in de terminal plaatsen. 
+Er zijn verschillende soorten taken die je kan toevoegen. Om ze te bekijken moet je `uglifyjs -help` in de terminal intoetsen. 
 
 ### Build tools in npm scripts
-Ik heb een paar build tool npm scripts gemaakt, zodat ik makkelijk mijn bestanden kan minimaliseren. 
+Ik heb een paar build tool npm scripts gemaakt, zodat ik makkelijk mijn bestanden kan minimaliseren. Hieornder zie je een paar voorbeelden.
 
 ```json
 
@@ -539,21 +590,21 @@ Ik heb een paar build tool npm scripts gemaakt, zodat ik makkelijk mijn bestande
     "minify:js": "uglifyjs-folder ./public/script -eo ./public/script-output/clientside.min.js"
 ```
 
-Ik heb ten eerste een npm script gemaakt om de server te bundlen als het ooit groot wordt. De script hiervoor is `npm run minify:server`. Als ik dit commando uitvoert, wordt de verkleinde versie opgeslagen in een `app.min.js`. Verder heb ik een extra npm package geinstalleerd: `uglify-folder`. Het zorgt ervoor dat alle bestanden in een bepaalde bestandmap apart wordt gecomprimeerd. Maar er is ook een mogelijkheid om alle bestanden in een bestandmap in een bestand wordt opgeslagen. 
+Ik heb ten eerste een npm script gemaakt om de server te bundlen als het ooit groot wordt. De script hiervoor is `npm run minify:server`. Als ik dit commando uitvoert, wordt de verkleinde versie opgeslagen in een `app.min.js`. Verder heb ik een extra npm package geïnstalleerd: `uglify-folder`. Het zorgt ervoor dat alle bestanden in een bepaalde bestandmap apart wordt gecomprimeerd. Maar er is ook een mogelijkheid om alle bestanden in een bestandmap als in bestand opslaan. 
 
 ## SASS
-Sass is een css preprocessor. Sass wordt gebruikt wanneer de css stylesheet groot wordt en moeilijk wordt om te behandelen. Het zorgt ervopr dat de css leesbaar blijft. Sass komt met verschillende functionaliteiten die niet te vinden is in normale css. Functionaliteiten zoals nesten,  mixins and inheritance.
+Sass is een css preprocessor. Sass wordt gebruikt wanneer de css stylesheet groot wordt en moeilijk wordt om te behandelen. Het zorgt ervoor dat de css leesbaar blijft. Sass komt met verschillende functionaliteiten die niet te vinden is in normale css. Functionaliteiten zoals nesten,  mixins and inheritance.
 
 ### Sass installeren
-Ik heb Sass in mijn terminal geinstalleerd met npm.
+Ik heb Sass in mijn terminal geïnstalleerd met npm.
 
     npm install sass --save-dev
 
-Ik de package in mijn devDependencie geinstalleerd. 
+Ik de package in mijn devDependencie geïnstalleerd. 
 
 
 ### Sass gebruiken
-Om Sass te gebruiken moet u de bestand extensie zetten als`.scss`. Hierin kun je de functionaliteiten gebruiken. Daarna voer je een commando in die ervoor zorgt dat de Scss bestand naar wordt omgezet naar css want de browser kan alleen css lezen. De commando die ik moet uitvoeren is:
+Om Sass te gebruiken moet je de bestand extensie zetten als`.scss`. Hierin kun je de functionaliteiten gebruiken. Daarna voer je een commando in, die ervoor zorgt dat de Scss bestand  wordt omgezet naar css want de browser kan alleen css lezen. De commando die ik moet uitvoeren is:
 
 
 ```npm
@@ -565,7 +616,7 @@ Hiermee wordt de scss bestand compiled naar css met de bestandnaam output.css.
 ### Functionaliteit met sass
 
 ### Nesten
-Elementen die bij elkaar horen kunnen genest worden onder een parent element. Ik kan een voorbeeld in mijn project. 
+Elementen die bij elkaar horen kunnen genest worden onder een parent element. Hier is een voorbeeld vanuit mijn eigen project.
 
 ```scss
 // styles.scss 
@@ -603,13 +654,14 @@ header {
 }
 
 ```
+
 ---
 
 ## Maak de applicatie een Progressive Web App.
 In de volegnde opdracht heb ik mijn applicatie omgezet in een progressive Web App(PWA). Dus ik zorgde ervoor dat ik mijn app kan  installeren via mijn browser naar mijn lokale computer. De voordelen van PWA zijn:
 - Het is snel 
 - De app kan offline gebruikt worden
-- Je kan het installeren op de homescherm van je telefoon of desktop op je laptop
+- Je kan het installeren op de homescherm van je telefoon of desktop.
 - Je krijgt push notificatie als iets in de achtergrond van de App is gebeurd
 
 
@@ -623,17 +675,18 @@ Om de App om te zetten in een PWA moet je de volgende dingen hebben namelijk,
 ### Dev tools in Chrome
 
 ### Applicatie tab
-In Chrome als je op de applicatie tab gaat kun je bekijken of er wel een manifest.json bestand heeft in je applicatie. Ook kun je informatie vinden over de server worker etc. 
+In Chrome als je op de applicatie tab gaat kun je bekijken of er wel een manifest.json bestand in het project te vinden is. Ook kun je informatie vinden over de server worker en cache enz. 
 
 ### Lighthouse
-In de lighthouse tab ga de browser je applicatie beordelen of je bepaalde riteria behaald zoals seo, toegankelijkheid, performance, Best practices en Progressive Web App. Als je bepaalde criteria niet voldoet dan krijg  je oplossing om die te verbeteren.
+In de lighthouse tab ga de browser je applicatie beoordelen of je bepaalde criteria behaald zoals seo, toegankelijkheid, performance, Best practices en Progressive Web App. Als je bepaalde criteria niet voldoet dan krijg  je oplossingen om die te verbeteren.
 
+---
 
 ## Manifest.json
-De Manifest bestand is een json bestand met bepaalde nformatie die je moet invullen voor de PWA. Het verteld de browser hoe de app moet gedragen als die geïnstalleerd is.
+De Manifest bestand is een json bestand met bepaalde informatie die je moet invullen voor de PWA. Het verteld de browser hoe de app moet gedragen als die geïnstalleerd is.
 
 ### Hoe maak je een manifest bestand?
-Ten eerste maak je een bestand in de root van de project. Mijn applicatie is server-side gerendered dus ik heb de van mij in de root gezet van de public bestand. Verder heb ik een bestand gemaakt die heet `manifest.json`. In de Manifest.json enkele object properties. 
+Ten eerste maak je een bestand in de root van het project. Mijn applicatie is server-side gerendered dus ik heb die van mij in de root gezet van de public bestandmap. Verder heb ik een bestand gemaakt die heet `manifest.json`. In de Manifest.json heb je een aantal object properties. 
 Properties die je tenminste moet hebben in je manifest bestand zijn:
 - `short_name` - Korte naam van de applicatie
 - `name` - Volledige naam van de applicatie
@@ -661,12 +714,12 @@ Om de manifest bestand te koppelen aan de app moet je die zetten in de `<link>` 
 ```html
  <link rel="manifest" href="/manifest.json">
 ```
-Als je naar de Applicatie browser gaat, dan kun de informatie die je hbe ingevuld terug zien.
+Als je naar de Applicatie tab in je browser gaat, dan kun je de informatie die je hebt ingevuld in het manifest bestand terug zien.
 
 ---
 
 ## Service Worker
-Het volgende stap om mijn prototype een progressive web app te maken, heb ik een service worker geinstalleerd. Voordat ik aan het werk ging, heb ik een Job Story bedacht om een richtlijn te krijgen van de stappen die ik moet nemen. 
+Het volgende stap om mijn prototype een progressive web app te maken, heb ik een service worker geïnstalleerd. Voordat ik aan het werk ging, heb ik een Job Story bedacht om een richtlijn te krijgen van de stappen die ik moet nemen. 
 
 ### Job Story
 > Wanneer ik in de trein zit en geen goed internetverbinding hebt, wil ik alsnog de lijst met citaten zien, zodat ik onderweg nog steeds inspiratie kunnen krijgen voor mijn schoolprojecten. 
@@ -685,19 +738,19 @@ Service workers gedragen als een proxy server tussen de web applicatie, de brows
 - Het is geschreven met javascript
 - Werkt in de achtergrond
 - Staat in een aparte lijn ten opzichte de server en de client
-- Het event gebasseerd
+- Het is event gebasseerd
 - Heeft geen toegang tot Document Object Model
 - Kan geen javascript modules importeren
 - Ze draaien alleen op HTTPS vanwege beveiliging. 
 
 
-## Hoe werkt het allemaal?
+## Hoe werkt de Service worker?
 
 ### Stap 1: Service worker bestand maken
 Ik heb in de root van mijn public bestand, de `sw.js`, bestand gemaakt. Als ik niet server side hoefde te werken, moest ik gewoon in de root van mijn applicatie werken. 
 
 ### Stap 2: Service worker registreren 
-Verder moet je de service worker registreren, zodat de browser weet dat dit web app een service worker bevat. Wat ik heb gedaan is een partails bestand gemaakt met daarin de registratie script. Vervolgens heb ik met de `include()` methode deze stukje code in al mijn pagina's geplaatst.
+Verder moet je de service worker registreren, zodat de browser weet dat dit web app een service worker bevat. Wat ik heb gedaan is een partials bestand `script-tag.ejs `gemaakt met daarin de registratie script. Vervolgens heb ik met de `include()` methode deze stukje code in al mijn pagina's geplaatst.
 
 ```html
 <script>
@@ -708,16 +761,16 @@ Verder moet je de service worker registreren, zodat de browser weet dat dit web 
     }   
 </script>
 ```
-Deze functie stuurt een bericht naar de console dat die geregistreerd is. IK geef aan welke bestand de server worker is. 
+Deze functie stuurt een bericht naar de console dat die geregistreerd is. IK geef aan welke bestand de service worker is. 
 
 
-### Onderdelen van de server worker
-Een server is event gebaseerd. Het bestaat uit drie events, de install event, de activate event en de fetch event. In de install event wordt de server worker geinstalleerd. Hier wordt ook de precaching gedaan. Verder heb je de activate event,hier wordt de service worker geactiveerd en klaar gemaakt om request en response te nemen. En Als laatste heb je de fetch event. In deze event wordt de opgeslagen data opgehaald en gerendered op de pagina of gaat terug naar de offline fallback pagina.
+### Onderdelen van de service worker
+Een service worker is event gebaseerd. Het bestaat uit drie events, de install event, de activate event en de fetch event. In de install event wordt de service  worker geïnstalleerd. Hier wordt ook de precaching gedaan. Verder heb je de activate event,hier wordt de service worker geactiveerd en klaar gemaakt om request en response te nemen. En Als laatste heb je de fetch event. In deze event wordt de opgeslagen data opgehaald en gerendered op de pagina of gaat terug naar de offline fallback pagina.
 
 ### Stap 4: Service worker bestand opstellen
 
 ### Precaching install event
-De precaching  wordt gedaan in de install event. Ik heb twee constante variabele. De `CORE_CACHE_NAME` is de versie naam van de service worker/cache en de `CORE_ASSETS` zijn de statische bestanden die ik van te voren wil cachen zodat die beschikbaar zijn wanneer de gebruiker geen internet verbinding heeft. Statisch bestanden zijn voor css, client-side javascript, fonts ect. 
+De precaching  wordt gedaan in de install event. Ik heb twee constante variabele. De `CORE_CACHE_NAME` is de versie naam van de service worker/cache en de `CORE_ASSETS` zijn de statische bestanden die ik van te voren wil cachen zodat die beschikbaar zijn wanneer de gebruiker geen internet verbinding heeft. Statisch bestanden zijn vooral css, client-side javascript, fonts enzovoorts. 
 
 ```javascript
 const CORE_CACHE_NAME = 'cache-v1';
@@ -744,8 +797,9 @@ self.addEventListener('install', event => {
 - `skipWaiting()`
 - `waitUntil()`
 - `self` is de service worker zelf
+  
 ### Serve from cache met fetch event
-Met de fetch event haal ik de data uit de cache. Dus wanneer de gebruiker de pagina benadert wordt de url ogeslagen in de `DYNAMIC_CACHE_NAME`. Dus wanneer er geen internetverbinding is het offline mogelijk om de pagina's te gebruiken. Bij de niet opgeslagen url is het onmogelijk om de pagina te gebruiken als je offline bent. In dit geval krijgen deze pagina een offline fallbackpagina
+Met de fetch event haal ik de data uit de cache. Dus wanneer de gebruiker de pagina benadert wordt de url ogeslagen in de `DYNAMIC_CACHE_NAME`. Dus wanneer er geen internetverbinding is het offline mogelijk om de pagina's te gebruiken. Bij de niet opgeslagen url is het onmogelijk om de pagina te gebruiken als je offline bent. In dit geval krijgen de gebruiker een offline fallbackpagina
 ![offlinepagina](./public/images/fallbackpagina.png).
 
 ```javascript
@@ -772,7 +826,7 @@ self.addEventListener('fetch', event => {
 ```
 
 ### Cache verschonen met het activate event 
-In de activate wordt de server worker geactiveerd wanneer het klaar is met installeren. Ik heb een functie geschreven waar ode cache versie verwijdert wordt en door het nieuwe verplaatst worden. Hieronder staat mijn code:
+In de activate wordt de server worker geactiveerd wanneer het klaar is met installeren. Ik heb een functie geschreven waar oude cache versie verwijdert wordt en door het nieuwe verplaatst worden. Hieronder staat mijn code:
 
 ```javascript
 self.addEventListener('activate', (event) => {
@@ -791,10 +845,11 @@ self.addEventListener('activate', (event) => {
 
 ```
 Als de oude caches niet matchen dan wordt de oude versie verwijdert.
-## Activity Flow van de Service worker
+
+## Activity Diagram van de Service worker
 ![Activity Diagram](public/images/activity-diagram-service-worker.png)
 
-Dit is mijn activity diagram voor de service worker. Het diagram bestaat uit, een wireflow van de applicatie. De url endpoints van de applicaties. Onderaan heb je de control flow dus de belangrijkste onderdeel van de activity diagram. 
+Dit is mijn activity diagram voor de service worker. Het diagram bestaat uit, een wireflow van de applicatie. De url endpoints van de applicaties. Onderaan heb je de control flow dus de belangrijkste onderdeel van de activity diagram. Met de activity diagram laat ik  visueel zien hoe de service worker werkt.
 
 ---
 # Critical rendering path
@@ -823,7 +878,7 @@ Ik heb een voorbeeld laten zien van mijn prototype met en zonder geminimaliseerd
 
 
 ### 2. HTML minimaliseren
-Om de html te minimaliseren heb ik gebruikt gemaakt van express-minify-html. Het is een express middleware die je in de express server kan toevoegen met de `app.use` instantie. Verder kun je bepaalde opties geven die hij moet rekening houden tijdens het minimalisatie. Hier is de code die ik heb daarvoor gebruikt. 
+Om de html te minimaliseren heb ik gebruikt gemaakt van express-minify-html. Het is een express middleware die je in de express server kan toevoegen met de `app.use` methode. Verder kun je bepaalde opties geven die hij moet rekening houden tijdens het minimalisatie. Hier is de code die ik heb daarvoor gebruikt. 
 
 ```javascript
 const minifyHTML = require('express-minify-html');
@@ -843,7 +898,7 @@ app.use(minifyHTML({
 
 ```
 ### Lazy Loading voor afbeelding
-Mijn prototype gebruikt veel afbeeldingen en het zorgt ervoor dat de afbeeldingen niet meteen geladen wordt maar wanneer het echt noodzakkelijk is. Wat ik heb gedaan is bij de `<img>` heb ik de `loading="lazy"` geplaatst. Het zorgde ervoor dat de pagina snel laad. Ja want in mijn applicatie is de citaten dat belangrijk zijn en niet de afbeeldingen. Dus als die later geladen wordt is het niet erg. 
+Mijn prototype gebruikt veel afbeeldingen en lazy loading zorgt ervoor dat de afbeeldingen niet meteen geladen wordt maar wanneer het echt noodzakkelijk is. Wat ik heb gedaan is bij de `<img>` heb ik de `loading="lazy"` atribuut geplaatst. Het zorgde ervoor dat de pagina snel laad. In mijn applicatie zijn de citaten het belangrijkste content  en niet de afbeeldingen. Dus als die later geladen wordt is het niet erg. 
 
 
 ### Afbeelding verkleinen
@@ -853,13 +908,13 @@ Een andere oplossing is de grootte van de afbeelding te verkleinen. Voor mij kan
 
 ### Font subsetting
 Ik heb custom fonts van google fonts gebruikt in mijn app. Deze lettertypes zijn belangrijk want het onderscheid de type informatie die ik wil aan de gebruiker laten zien. 
-Toe ik mijn app teste, heb ik gemerkt dat voordat het pagina geladen wordt, kon je de fonts niet zien. Als er iemand de app zou gebruiken met een trage apparaat en internetverbinding, dan kunnen de app meemaken zonder lettertype. Dit fenomeen heet de foit (Flash of invisible text). Om foit te voorkomen moest ik de css property `@font-face` gebruiker per lettertype met daarbij `font-display: swap`.
+Toen ik mijn app teste, heb ik gemerkt dat voordat het pagina geladen wordt, kon je de fonts niet zien. Als er iemand de app zou gebruiken met een trage apparaat en internetverbinding, dan kunnen ze de app meemaken zonder lettertype. Dit fenomeen heet de foit (Flash of invisible text). Om foit te voorkomen moest ik de css property `@font-face` gebruiker per lettertype met daarbij `font-display: swap`.
 
 ![foit](public/images/font-display-swap.png)
 
-Ik heb dus de google fonts geinstalleerd en in fontsquirrel een webfont ervan gemaakt. Verder heb ik de fonts in de font-face property geplaats met de font-display.
+Ik heb dus de google fonts geïnstalleerd en in fontsquirrel een webfont ervan gemaakt. Verder heb ik de fonts in de font-face property geplaats met de font-display.
 
-Want het doe is voordat de pagina klaar is met laden, wordt eerst de systeem fonts gerendered en nadat de pagina wordt geladen wordt de systeem fonts verandert (swap) met de custom fonts.
+Want het doet is voordat de pagina klaar is met laden, wordt eerst de systeem fonts gerendered en nadat de pagina wordt geladen wordt de systeem fonts omgewisseld (swap) met de custom fonts.
 
 ```css
 
@@ -904,6 +959,16 @@ app.use(express.static('public', options))
 De laatste onderdeel voor dit opdracht is de app online zetten. Hiervoor heb ik een online webserver gebruikt  die mijn webapp kan hosten. Ik heb `railway.app` gebruikt. Met railway kan ik mijn github account koppelen en elke keer dat ik commit wordt het ook op railway aangepast. 
 
 ![Railway](public/images/railway.png)
+
+### Hoe gebruik je railway
+1. Npm Script in je package.json moet zo zijn: `" start": "node app.js"`
+2. Railway account maken met je github account
+3. Nieuwe account instellingen doen
+4. Repository kiezen
+5. Nieuw project aanmaken
+6. Domeinnaam genereren in de instellingen
+7. Bij Variabele de PORT en PORT NUMMER toevoegen
+
 ---
 ## Bronnen
 - https://sass-lang.com/guide
