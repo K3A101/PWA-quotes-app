@@ -780,10 +780,6 @@ Om de critical rendering path te optimaliseren, zijn er verschillende technieken
 Om de performance van de app te testen, heb ik de dev tools in de browser gebruikt. De eerste is lighthouse. Lighthouse maakt een analyse en geef je een score terug. Onderaan zijn er bepaalde criteria's die je moet voldoen om de performance te verhogen. Het volgende functionaliteit is de netwerk tab, hier kan je informatie vinden van je http request. Het laatste onderdeel is de applicatie tab, hier zijn de browser API's. Voor deze vak moest ik alleen kijken, bij de manifest, Service Worker en de Cache Storage. 
 
 
-
-
-
-
 ## Hoe heb ik de critical rendering path beter gemaakt? 
 Voor mijn critical rendering path wil ik de percieved load speed optimaliseren en de runtime responsiveness. 
 Om de critical rendering path te verbeteren en optimaliseren, heb ik een aantal dingen gedaan:
@@ -792,8 +788,9 @@ Om de critical rendering path te verbeteren en optimaliseren, heb ik een aantal 
 De eerste wat ik heb gedaan is de css, minimaliseren. Ik heb een plugin van vscode gebruikt. Maar de plugin is hetzelfde als de build tool van uglifyjs. Wat dit doet, is het haal alle witruimte en zet alle css properties op een lijn. 
 Ik heb een voorbeeld laten zien van mijn prototype met en zonder geminimaliseerde css.
 
-![Normale css](public/images/css-norm-2.png)
 ![Geminimaliseerde Css](public/images/css-minify-2.png)
+![Normale css](public/images/css-norm-2.png)
+
 
 ### 2. HTML minimaliseren
 Om de html te minimaliseren heb ik gebruikt gemaakt van express-minify-html. Het is een express middleware die je in de express server kan toevoegen met de `app.use` instantie. Verder kun je bepaalde opties geven die hij moet rekening houden tijdens het minimalisatie. Hier is de code die ik heb daarvoor gebruikt. 
@@ -818,6 +815,11 @@ app.use(minifyHTML({
 ### Lazy Loading voor afbeelding
 Mijn prototype gebruikt veel afbeeldingen en het zorgt ervoor dat de afbeeldingen niet meteen geladen wordt maar wanneer het echt noodzakkelijk is. Wat ik heb gedaan is bij de `<img>` heb ik de `loading="lazy"` geplaatst. Het zorgde ervoor dat de pagina snel laad. Ja want in mijn applicatie is de citaten dat belangrijk zijn en niet de afbeeldingen. Dus als die later geladen wordt is het niet erg. 
 
+
+### Afbeelding verkleinen
+Een andere oplossing is de grootte van de afbeelding te verkleinen. Voor mij kan het makkelijk, want ik kan direct mijn api aanpassen. De afbeeldingen in de API zijn links vanuit verschillende websites. Dus ik heb per afbeelding de originele afbeelding link gevonden. Hierin kan je de ook de grootte zien. Ik heb de afmetingen in de link kleiner gemaakt. Meeste afbeelding waren groot dus in de netwerk tab duurt het even zodat ze gerendered zijn. Maar door die kleine aapassingen werd iets sneller. Hieronder is een voorbeeld:
+
+![Afbeelding verkleinen](/public/images/api.png)
 
 ### Font subsetting
 Ik heb custom fonts van google fonts gebruikt in mijn app. Deze lettertypes zijn belangrijk want het onderscheid de type informatie die ik wil aan de gebruiker laten zien. 
@@ -858,6 +860,7 @@ Want het doe is voordat de pagina klaar is met laden, wordt eerst de systeem fon
 ```
 Dit is het resultaat nadat ik dit heb gedaan.
 ![foit](public/images/font-face.png)
+
 ### Caching control
 Caching control is een methode die wordt gebruikt om de cache-instellingen van een webpagina of een ander bestand op een webserver te beheren. Wanneer een browser een webpagina bezoekt, wordt een kopie van de pagina opgeslagen in de cache van de browser om de laadtijd van toekomstige bezoeken aan die pagina te versnellen...
 
